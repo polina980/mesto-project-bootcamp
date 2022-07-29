@@ -1,0 +1,20 @@
+/* 320px */
+.form__user-name {
+  margin: 0;
+  padding: 0;
+  width: 238px;
+  height: 27px;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .2);
+  font-size: 14px;
+  line-height: 16.94px;
+  outline: 0;
+ 
+}
+
+/* 768px 1024px 1280px */
+@media screen and (min-width: 768px) {
+  .form__user-name {
+    width: 358px;
+  }
+}

@@ -1,0 +1,17 @@
+/* 320px */
+.form__title {
+  margin: 0;
+  padding: 26px 0 73px 22px;
+  font-size: 18px;
+  line-height: 21.78px;
+  font-weight: 900;
+}
+
+/* 768px 1024px 1280px */
+@media screen and (min-width: 768px) {
+  .form__title { 
+    padding: 34px 0 47px 36px;
+    font-size: 24px;
+    line-height: 29px;
+  }
+}

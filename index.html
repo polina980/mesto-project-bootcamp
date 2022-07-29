@@ -19,6 +19,19 @@
       </div>
       <button class="profile__add-button" aria-label="Добавить фотографии"></button>
     </section>
+    <section class="popup popup_opened">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button"></button>
+        <form class="form">
+          <h3 class="form__title">Редактировать профиль</h3>
+          <fieldset class="form__user-info">
+            <input type="text" class="form__user-name" name="name" placeholder="Жак-Ив Кусто">
+            <input type="text" class="form__user-about" name="about" placeholder="Исследователь океана">
+            <input type="button" class="form__submit-button" value="Сохранить">
+          </fieldset>
+        </form>
+      </div>
+    </section>
     <section class="photo-grid">
       <ul class="photo-grid__items">
         <li class="photo-grid__card">

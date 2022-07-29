@@ -1,0 +1,31 @@
+/* 320px */
+.popup__close-button {
+  position: absolute;
+  top: -36px;
+  right: 0;
+  border: none;
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  --weight: 1px;
+  --aa: 1px;
+  --color: white;
+  border-radius: 3px;
+  background: linear-gradient(45deg, transparent calc(50% - var(--weight) - var(--aa)), var(--color) calc(50% - var(--weight)), var(--color) calc(50% + var(--weight)), transparent calc(50% + var(--weight) + var(--aa))), linear-gradient(-45deg, transparent calc(50% - var(--weight) - var(--aa)), var(--color) calc(50% - var(--weight)), var(--color) calc(50% + var(--weight)), transparent calc(50% + var(--weight) + var(--aa)));
+}
+
+.popup__close-button:hover {
+  opacity: .6;
+  transition: opacity .5s ease-in;
+}
+
+/* 768px 1024px 1280px */
+@media screen and (min-width: 768px) {
+  .popup__close-button {
+    width: 32px;
+    height: 32px;
+    top: -40px;
+    right: -40px;
+    --weight: 1.8px;
+  }
+}
