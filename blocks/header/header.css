@@ -1,0 +1,16 @@
+/* 320px 768px */
+.header {
+  display: flex;
+  flex-direction: column;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 28px 0 0 27px;
+  border-bottom: 1px solid #545454;
+}
+
+/* 1024px 1280px */
+@media screen and (min-width: 1024px) {
+  .header {
+    padding: 45px 0 0;
+  }
+}

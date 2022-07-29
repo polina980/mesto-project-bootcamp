@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Mesto</title>
+</head>
+<body class="page">
+  <header class="header">
+    <img class="header__logo" src="./images/mesto-logo.svg" alt="Логотип Mesto">
+  </header>
+  <main class="content">
+    <section class="profile">
+      <img class="profile__image" src="./images/cousteau.jpg" alt="Портрет Кусто">
+      <div class="profile__info">
+        <h1 class="profile__title">Жак-Ив Кусто <button class="profile__edit-button" aria-label="Редактировать профиль"></button></h1>
+        <p class="profile__text">Исследователь океана</p>
+      </div>
+      <button class="profile__add-button" aria-label="Добавить фотографии"></button>
+    </section>
+    <section class="photo-grid">
+      <ul class="photo-grid__items">
+        <li class="photo-grid__card">
+          <img class="photo-grid__image" src="./images/pacific-ocean.jpg" alt="Тихий океан">
+          <div class="photo-grid__group">
+            <h2 class="photo-grid__title">Тихий океан</h2>
+            <button class="photo-grid__like-button" aria-label="Нравится"></button>
+          </div>
+        </li>
+        <li class="photo-grid__card">
+          <img class="photo-grid__image" src="./images/laptev-sea.jpg" alt="Море Лаптевых">
+          <div class="photo-grid__group">
+            <h2 class="photo-grid__title">Море Лаптевых</h2>
+            <button class="photo-grid__like-button" aria-label="Нравится"></button>
+          </div>
+        </li>
+        <li class="photo-grid__card">
+          <img class="photo-grid__image" src="./images/lake-ladoga.jpg" alt="Озеро Ладога">
+          <div class="photo-grid__group">
+            <h2 class="photo-grid__title">Озеро Ладога</h2>
+            <button class="photo-grid__like-button" aria-label="Нравится"></button>
+          </div>
+        </li>
+        <li class="photo-grid__card">
+          <img class="photo-grid__image" src="./images/indian-ocean.jpg" alt="Индийский океан">
+          <div class="photo-grid__group">
+            <h2 class="photo-grid__title">Индийский океан</h2>
+            <button class="photo-grid__like-button" aria-label="Нравится"></button>
+          </div>
+        </li>
+        <li class="photo-grid__card">
+          <img class="photo-grid__image" src="./images/barents-sea.jpg" alt="Баренцево море">
+          <div class="photo-grid__group">
+            <h2 class="photo-grid__title">Баренцево море</h2>
+            <button class="photo-grid__like-button" aria-label="Нравится"></button>
+          </div>
+        </li>
+        <li class="photo-grid__card">
+          <img class="photo-grid__image" src="./images/lake-baikal.jpg" alt="Озеро Байкал">
+          <div class="photo-grid__group">
+            <h2 class="photo-grid__title">Озеро Байкал</h2>
+            <button class="photo-grid__like-button" aria-label="Нравится"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+  <footer class="footer">
+    <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
+  </footer>
+  <script src="./script.js"></script>
+</body>
+</html>

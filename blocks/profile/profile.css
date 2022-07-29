@@ -1,0 +1,22 @@
+/* 320px 768px */
+.profile {
+  display: grid;
+  align-items: center;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 40px 0 36px;
+  grid-template-areas:
+  "image"
+  "info"
+  "add-button";
+}
+
+/* 1024px 1280px */
+@media screen and (min-width: 1024px) {
+  .profile {
+    grid-template-areas:
+    "image info add-button";
+    grid-template-columns: 145px auto 150px;
+    padding: 28px 0 40px;
+  }
+}

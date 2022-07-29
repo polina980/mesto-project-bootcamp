@@ -1,0 +1,14 @@
+/* 320px 768px */
+.profile__image {
+  grid-area: image;
+  max-width: 120px;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+/* 1024px 1280px */
+@media screen and (min-width: 1024px) {
+  .profile__image {
+    margin: 0;
+  }
+}

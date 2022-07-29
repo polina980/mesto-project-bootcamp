@@ -1,0 +1,19 @@
+/* 320px 768px */
+.profile__text {
+  text-align: center;
+  font-size: 14px;
+  line-height: 16.94px;
+  font-weight: 400;
+  margin: 0 auto;
+  padding: 10px 0 32px;
+  color: #fff;
+}
+
+/* 1024px 1280px */
+@media screen and (min-width: 1024px) {
+  .profile__text {
+    text-align: left;
+    font-size: 18px;
+    line-height: 21.78px;
+  }
+}
