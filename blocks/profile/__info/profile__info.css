@@ -1,4 +1,12 @@
+/* 320px 768px */
 .profile__info {
   margin: 0;
   grid-area: info;
+}
+
+/* 1024px 1280px */
+@media screen and (min-width: 1024px) {
+  .profile__info {
+    padding-left: 5px;
+  }
 }

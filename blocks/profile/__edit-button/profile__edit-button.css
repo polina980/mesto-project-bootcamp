@@ -3,7 +3,7 @@
   background-image: url(../../../images/edit-button.svg);
   width: 18px;
   height: 18px;
-  margin: 0;
+  margin: 0 0 0 3px;
   background-color: #000;
   border: none;
   cursor: pointer;
@@ -20,5 +20,6 @@
     background-image: url(../../../images/edit-button-big.svg);
     width: 24px;
     height: 24px;
+    margin: 0 0 0 8px;
   }
 }

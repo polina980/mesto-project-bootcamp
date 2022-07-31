@@ -2,11 +2,14 @@
 .profile__text {
   text-align: center;
   font-size: 14px;
-  line-height: 16.94px;
+  line-height: 16px;
   font-weight: 400;
   margin: 0 auto;
-  padding: 10px 0 32px;
+  padding: 8px 0 33px;
   color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /* 1024px 1280px */
@@ -14,6 +17,7 @@
   .profile__text {
     text-align: left;
     font-size: 18px;
-    line-height: 21.78px;
+    line-height: 22px;
+    padding: 7px 0 32px;
   }
 }

@@ -1,6 +1,6 @@
 /* 320px */
 .popup__container {
-  position: fixed;
+  position: inherit;
   width: 282px;
   height: 322px;
   background-color: #fff;
