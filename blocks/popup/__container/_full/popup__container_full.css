@@ -1,0 +1,15 @@
+/* 320px */
+.popup__container_full {
+  max-width: 240px;
+  height: 321px;
+  background-color: transparent;
+  border-radius: 0;
+}
+
+/* 768px 1024px 1280px */
+@media screen and (min-width: 768px) {
+  .popup__container_full {
+  max-width: 816px;
+  height: 562px;
+}
+}

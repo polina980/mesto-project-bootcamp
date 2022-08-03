@@ -21,15 +21,19 @@
     </section>
     <section class="photo-grid">
       <ul class="photo-grid__items">
+        
         <li class="photo-grid__card">
           <img class="photo-grid__image" src="./images/pacific-ocean.jpg" alt="Тихий океан">
+          <button class="profile__trash-button" type="reset" aria-label="Корзина"></button>
           <div class="photo-grid__group">
             <h2 class="photo-grid__title">Тихий океан</h2>
             <button class="photo-grid__like-button" type="button" aria-label="Нравится"></button>
           </div>
+
         </li>
         <li class="photo-grid__card">
           <img class="photo-grid__image" src="./images/laptev-sea.jpg" alt="Море Лаптевых">
+          <button class="profile__trash-button" type="reset" aria-label="Корзина"></button>
           <div class="photo-grid__group">
             <h2 class="photo-grid__title">Море Лаптевых</h2>
             <button class="photo-grid__like-button" type="button" aria-label="Нравится"></button>
@@ -37,6 +41,7 @@
         </li>
         <li class="photo-grid__card">
           <img class="photo-grid__image" src="./images/lake-ladoga.jpg" alt="Озеро Ладога">
+          <button class="profile__trash-button" type="reset" aria-label="Корзина"></button>
           <div class="photo-grid__group">
             <h2 class="photo-grid__title">Озеро Ладога</h2>
             <button class="photo-grid__like-button" type="button" aria-label="Нравится"></button>
@@ -44,6 +49,7 @@
         </li>
         <li class="photo-grid__card">
           <img class="photo-grid__image" src="./images/indian-ocean.jpg" alt="Индийский океан">
+          <button class="profile__trash-button" type="reset" aria-label="Корзина"></button>
           <div class="photo-grid__group">
             <h2 class="photo-grid__title">Индийский океан</h2>
             <button class="photo-grid__like-button" type="button" aria-label="Нравится"></button>
@@ -51,6 +57,7 @@
         </li>
         <li class="photo-grid__card">
           <img class="photo-grid__image" src="./images/barents-sea.jpg" alt="Баренцево море">
+          <button class="profile__trash-button" type="reset" aria-label="Корзина"></button>
           <div class="photo-grid__group">
             <h2 class="photo-grid__title">Баренцево море</h2>
             <button class="photo-grid__like-button" type="button" aria-label="Нравится"></button>
@@ -58,6 +65,7 @@
         </li>
         <li class="photo-grid__card">
           <img class="photo-grid__image" src="./images/lake-baikal.jpg" alt="Озеро Байкал">
+          <button class="profile__trash-button" type="reset" aria-label="Корзина"></button>
           <div class="photo-grid__group">
             <h2 class="photo-grid__title">Озеро Байкал</h2>
             <button class="photo-grid__like-button" type="button" aria-label="Нравится"></button>
@@ -69,21 +77,51 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
   </footer>
-  <section class="popup popup_opened">
+
+  <section class="popup popup_edit-profile">
     <div class="popup__background">
       <div class="popup__container">
         <button class="popup__close-button" type="button"></button>
         <h2 class="form__title">Редактировать профиль</h2>
         <form class="form" name="edit-profile" method="post">
-          <fieldset class="form__user-info">
-            <input type="text" class="form__item form__item_user_name" name="name" placeholder="Жак-Ив Кусто">
-            <input type="text" class="form__item form__item_user_about" name="about" placeholder="Исследователь океана">
+          <fieldset class="form__set">
+            <input type="text" class="form__item form__item_user-name" name="user-name" placeholder="Жак-Ив Кусто">
+            <input type="text" class="form__item form__item_user-about" name="user-about" placeholder="Исследователь океана">
             <input type="submit" class="form__submit-button" value="Сохранить">
           </fieldset>
         </form>
       </div>
     </div>
   </section>
+
+  <section class="popup popup_add-new-place">
+    <div class="popup__background">
+      <div class="popup__container">
+        <button class="popup__close-button" type="button"></button>
+        <h2 class="form__title">Новое место</h2>
+        <form class="form" name="add-new-place" method="post">
+          <fieldset class="form__set">
+            <input type="text" class="form__item form__item_place-name" name="place-name" placeholder="Название">
+            <input type="text" class="form__item form__item_place-url" name="place-url" placeholder="Ссылка на картинку">
+            <input type="submit" class="form__submit-button" value="Создать">
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="popup popup_full-image">
+    <div class="popup__background popup__background_full">
+      <div class="popup__container popup__container_full">
+        <button class="popup__close-button" type="button"></button>
+        <form class="image-set">
+          <img class="image__full" src="" alt="">
+          <p class="image__description"></p>
+      </fieldset>
+      </div>
+    </div>
+  </section>
+
   <script src="./script.js"></script>
 </body>
 </html>

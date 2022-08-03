@@ -6,8 +6,12 @@
   height: 27px;
   border: 0;
   border-bottom: 1px solid rgba(0, 0, 0, .2);
+  font-family: inherit; 
   font-size: 14px;
   line-height: 17px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   outline: 0;
 }
 

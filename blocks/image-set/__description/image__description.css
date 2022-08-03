@@ -1,0 +1,12 @@
+.image__description {
+  margin: 0;
+  padding-top: 10px;
+  text-align: left;
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 400;
+  color: #fff;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
