@@ -1,23 +1,24 @@
 /* 320px 768px */
 .profile__title {
+  max-width: 189px;
   text-align: center;
   font-size: 27px;
   line-height: 33px;
   font-weight: 500;
-  margin: 0 auto;
-  padding: 26px 0 0 27px;
+  margin: 0;
   color: #fff;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  grid-area: title;
 }
 
 /* 1024px 1280px */
 @media screen and (min-width: 1024px) {
   .profile__title {
+    max-width: 294px;
     text-align: left;
     font-size: 42px;
     line-height: 48px;
-    padding: 33px 0 0;
   }
 }

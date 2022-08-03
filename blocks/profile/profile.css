@@ -16,7 +16,8 @@
   .profile {
     grid-template-areas:
     "image info add-button";
-    grid-template-columns: 145px auto 150px;
-    padding: 28px 0 40px;
+    grid-template-columns: 120px 336px auto;
+    padding: 40px 0 50px;
+    gap: 30px;
   }
 }
