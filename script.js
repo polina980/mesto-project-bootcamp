@@ -6,11 +6,13 @@ const userName = document.querySelector('.profile__title');
 const userAbout = document.querySelector('.profile__text');
 const inputUserName = popupEdit.querySelector('.form__item_user-name');
 const inputUserAbout = popupEdit.querySelector('.form__item_user-about');
-const form = document.querySelector('form');
+const formEdit = popupEdit.querySelector('#edit-profile');
 
 // Add-button
 const buttonOpenAdd = document.querySelector('.profile__add-button');
 const popupAdd = document.querySelector('#popupAdd');
+const formAdd = popupAdd.querySelector('#add-new-place');
+
 
 // Functions
 function closePopup(event) {
@@ -37,7 +39,7 @@ buttonOpenEdit.addEventListener('click', function () {
 });
 
 // Forms
-form.addEventListener('submit', (event) => {
+formEdit.addEventListener('submit', (event) => {
   event.preventDefault();
   userName.textContent = inputUserName.value;
   userAbout.textContent = inputUserAbout.value;
@@ -45,6 +47,13 @@ form.addEventListener('submit', (event) => {
   closePopup(event);
 });
 
+formAdd.addEventListener('submit', (event) => {
+  event.preventDefault();
+  userName.textContent = inputUserName.value;
+  userAbout.textContent = inputUserAbout.value;
+
+  closePopup(event);
+});
 
 // CARDS
 const initialCards = [
