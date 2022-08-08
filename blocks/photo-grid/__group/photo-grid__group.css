@@ -1,8 +1,0 @@
-.photo-grid__group {
-  display: grid;
-  grid-template-areas:
-  "title-group like-button";
-  grid-template-columns: auto 22px;
-  max-width: 242px;
-  margin: 0 auto;
-}
