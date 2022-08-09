@@ -30,46 +30,40 @@
     <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
   </footer>
 
-  <section class="popup popup_hidden" id="popupEdit">
-    <div class="popup__background">
-      <div class="popup__container">
-        <button class="popup__close-button" type="button"></button>
-        <h2 class="form__title">Редактировать профиль</h2>
-        <form class="form" id="edit-profile" method="post">
-          <fieldset class="form__set">
-            <input type="text" class="form__item form__item_user-name">
-            <input type="text" class="form__item form__item_user-about">
-            <input type="submit" class="form__submit-button" value="Сохранить">
-          </fieldset>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <section class="popup popup_hidden" id="popupAdd">
-    <div class="popup__background">
-      <div class="popup__container">
-        <button class="popup__close-button" type="button"></button>
-        <h2 class="form__title">Новое место</h2>
-        <form class="form" id="add-new-place" method="post">
-          <fieldset class="form__set">
-            <input type="text" class="form__item form__item_place-name" placeholder="Название">
-            <input type="text" class="form__item form__item_place-url" placeholder="Ссылка на картинку">
-            <input type="submit" class="form__submit-button" value="Создать">
-          </fieldset>
-        </form>
-      </div>
-    </div>
-  </section>
-
-  <section class="popup popup_hidden" id="popupImage">
-    <div class="popup__background popup__background_full">
-      <div class="popup__container popup__container_full">
-        <button class="popup__close-button" type="button"></button>
-        <fieldset class="popup__image-set">
-          <input type="image" class="popup__image popup__image-set_full" alt="">
-          <input type="text" class="popup__image popup__image-set_description">
+  <section class="popup" id="popupEdit">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <h2 class="form__title">Редактировать профиль</h2>
+      <form class="form" id="edit-profile" method="post">
+        <fieldset class="form__set">
+          <input type="text" class="form__item form__item_user-name">
+          <input type="text" class="form__item form__item_user-about">
+          <input type="submit" class="form__submit-button" value="Сохранить">
         </fieldset>
+      </form>
+    </div>
+  </section>
+
+  <section class="popup" id="popupAdd">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <h2 class="form__title">Новое место</h2>
+      <form class="form" id="add-new-place" method="post">
+        <fieldset class="form__set">
+          <input type="text" class="form__item form__item_place-name" placeholder="Название">
+          <input type="text" class="form__item form__item_place-url" placeholder="Ссылка на картинку">
+          <input type="submit" class="form__submit-button" value="Создать">
+        </fieldset>
+      </form>
+    </div>
+  </section>
+
+  <section class="popup popup_darker" id="popupImage">
+    <div class="popup__container popup__container_full">
+      <button class="popup__close-button" type="button"></button>
+      <div class="popup__set">
+        <img class="popup__image" src="" alt="">
+        <p class="popup__text"></p>
       </div>
     </div>
   </section>
