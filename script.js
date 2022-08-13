@@ -55,7 +55,7 @@ function closePopup(event) {
 }
 
 // Function open pop-up
-function openPopup(popup) {
+function openPopupEdit(popup) {
   const buttonClose = popup.querySelector('.popup__close-button');
   buttonClose.addEventListener('click', closePopup);
   popup.classList.add('popup_opened');
@@ -63,13 +63,25 @@ function openPopup(popup) {
   inputUserAbout.value = userAbout.textContent;
 }
 
+function openPopupAdd(popup) {
+  const buttonClose = popup.querySelector('.popup__close-button');
+  buttonClose.addEventListener('click', closePopup);
+  popup.classList.add('popup_opened');
+}
+
+function openPopupImage(popup) {
+  const buttonClose = popup.querySelector('.popup__close-button');
+  buttonClose.addEventListener('click', closePopup);
+  popup.classList.add('popup_opened');
+}
+
 // Open buttons
 buttonOpenAdd.addEventListener('click', function () {
-  openPopup(popupAdd);
+  openPopupAdd(popupAdd);
 });
 
 buttonOpenEdit.addEventListener('click', function () {
-  openPopup(popupEdit);
+  openPopupEdit(popupEdit);
 });
 
 // Edit form
@@ -119,7 +131,7 @@ function createCard(link, name) {
   fullscreenImage.querySelector('.popup__image').src = link;
   fullscreenImage.querySelector('.popup__image').setAttribute('alt', name);
   fullscreenImage.querySelector('.popup__text').textContent = name;
-  openPopup(popupImage);
+  openPopupImage(popupImage);
   });
 
   function renderCard(cardNew) {

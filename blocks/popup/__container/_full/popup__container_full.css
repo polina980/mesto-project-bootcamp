@@ -1,6 +1,6 @@
 .popup__container_full {
-  max-width: 75vw;
-  max-height: 75vh;
+  max-width: fit-content;
+  max-height: fit-content;
   background-color: transparent;
   border-radius: 0;
 }
