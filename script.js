@@ -133,9 +133,9 @@ const setEventEditListeners = (formEdit) => {
 };
 
 const enableValidationEdit = () => {
-  const formListEdit = Array.from(document.querySelectorAll('.form'));
+  const formListEdit = Array.from(popupEdit.querySelectorAll('#edit'));
   formListEdit.forEach((formEdit) => {
-    formEdit.addEventListener('submit', (event) => {
+    formEdit.addEventListener('submit', function (event) {
       event.preventDefault();
     });
     setEventEditListeners(formEdit);
@@ -184,9 +184,9 @@ const setEventAddListeners = (formAdd) => {
 };
 
 const enableValidationAdd = () => {
-  const formListAdd = Array.from(document.querySelectorAll('.form'));
+  const formListAdd = Array.from(popupAdd.querySelectorAll('#add'));
   formListAdd.forEach((formAdd) => {
-    formAdd.addEventListener('submit', (event) => {
+    formAdd.addEventListener('submit', function (event) {
       event.preventDefault();
     });
     setEventAddListeners(formAdd);
