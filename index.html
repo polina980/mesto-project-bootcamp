@@ -34,10 +34,12 @@
     <div class="popup__container">
       <button class="popup__close-button" type="button"></button>
       <h2 class="form__title">Редактировать профиль</h2>
-      <form class="form" id="edit-profile" method="post">
+      <form class="form" id="edit" method="post" novalidate>
         <fieldset class="form__set">
-          <input type="text" class="form__item form__item_user-name">
-          <input type="text" class="form__item form__item_user-about">
+          <input type="text" class="form__input" id="person-input" minlength="2" maxlength="40" required>
+          <span class="form__input-error person-input-error"></span>
+          <input type="text" class="form__input" id="about-input" minlength="2" maxlength="200" required>
+          <span class="form__input-error about-input-error"></span>
         </fieldset>
         <button class="form__submit-button" type="submit">Сохранить</button>
       </form>
@@ -48,10 +50,12 @@
     <div class="popup__container">
       <button class="popup__close-button" type="button"></button>
       <h2 class="form__title">Новое место</h2>
-      <form class="form" id="add-new-place" method="post">
+      <form class="form" id="add" method="post" novalidate>
         <fieldset class="form__set">
-          <input type="text" class="form__item form__item_place-name" placeholder="Название">
-          <input type="text" class="form__item form__item_place-url" placeholder="Ссылка на картинку">
+          <input type="text" class="form__input" placeholder="Название" id="place-input" minlength="2" maxlength="30" required>
+          <span class="form__input-error place-input-error"></span>
+          <input type="url" class="form__input" placeholder="Ссылка на картинку" id="url-input" required>
+          <span class="form__input-error url-input-error"></span>
         </fieldset>
         <button class="form__submit-button" type="submit">Создать</button>
       </form>
