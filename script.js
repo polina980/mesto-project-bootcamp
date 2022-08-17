@@ -94,13 +94,6 @@ buttonOpenEdit.addEventListener('click', function () {
 
 
 // Edit form
-formEdit.addEventListener('submit', (event) => {
-  event.preventDefault();
-  userName.textContent = inputUserName.value;
-  userAbout.textContent = inputUserAbout.value;
-  closePopup(event);
-});
-
 const showInputEditError = (formEdit, formInputEdit, errorMessage) => {
   const formEditError = formEdit.querySelector(`.${formInputEdit.id}-error`);
   formInputEdit.classList.add('form__input_type_error');
@@ -137,6 +130,9 @@ const enableValidationEdit = () => {
   formListEdit.forEach((formEdit) => {
     formEdit.addEventListener('submit', function (event) {
       event.preventDefault();
+      userName.textContent = inputUserName.value;
+      userAbout.textContent = inputUserAbout.value;
+      closePopup(event);
     });
     setEventEditListeners(formEdit);
   });
@@ -145,13 +141,6 @@ enableValidationEdit();
 
 
 // Add form
-formAdd.addEventListener('submit', (event) => {
-  event.preventDefault();
-  createCard(inputPlaceUrl.value, inputPlaceName.value);
-  formAdd.reset();
-  closePopup(event);
-});
-
 const showInputAddError = (formAdd, formInputAdd, errorMessage) => {
   const formAddError = formAdd.querySelector(`.${formInputAdd.id}-error`);
   formInputAdd.classList.add('form__input_type_error');
@@ -188,6 +177,9 @@ const enableValidationAdd = () => {
   formListAdd.forEach((formAdd) => {
     formAdd.addEventListener('submit', function (event) {
       event.preventDefault();
+      createCard(inputPlaceUrl.value, inputPlaceName.value);
+      formAdd.reset();
+      closePopup(event);
     });
     setEventAddListeners(formAdd);
   });
