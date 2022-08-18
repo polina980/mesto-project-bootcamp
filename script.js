@@ -63,6 +63,7 @@ function closePopupEdit() {
   const buttonCloseEdit = popupEdit.querySelector('.popup__close-button');
   buttonCloseEdit.removeEventListener('click', closePopupEdit);
   popupEdit.removeEventListener('click', closePopupEditOverlay);
+  document.removeEventListener('keydown', closePopupEditEsc);
 }
 
 function closePopupEditOverlay(event) {
@@ -71,15 +72,27 @@ function closePopupEditOverlay(event) {
   }
 }
 
+function closePopupEditEsc (event) {
+  if (event.key === 'Escape') {
+    closePopupEdit();
+  }
+}
+
 function closePopupAdd() {
   popupAdd.classList.remove('popup_opened');
   const buttonCloseAdd = popupAdd.querySelector('.popup__close-button');
-  buttonCloseAdd.removeEventListener('click', closePopupAdd);
+  buttonCloseAdd.removeEventListener('click', closePopupAdd);!
   popupAdd.removeEventListener('click', closePopupAddOverlay);
 }
 
 function closePopupAddOverlay(event) {
   if (event.target === event.currentTarget) {
+    closePopupAdd();
+  }
+}
+
+function closePopupAddEsc (event) {
+  if (event.key === 'Escape') {
     closePopupAdd();
   }
 }
@@ -97,6 +110,12 @@ function closePopupImageOverlay(event) {
   }
 }
 
+function closePopupImageEsc (event) {
+  if (event.key === 'Escape') {
+    closePopupImage();
+  }
+}
+
 // Function open pop-up
 function openPopupEdit(popupEdit) {
   buttonCloseEdit.addEventListener('click', closePopupEdit);
@@ -104,18 +123,21 @@ function openPopupEdit(popupEdit) {
   inputUserName.value = userName.textContent;
   inputUserAbout.value = userAbout.textContent;
   popupEdit.addEventListener('click', closePopupEditOverlay);
+  document.addEventListener('keydown', closePopupEditEsc);
 }
 
 function openPopupAdd(popupAdd) {
   buttonCloseAdd.addEventListener('click', closePopupAdd);
   popupAdd.classList.add('popup_opened');
   popupAdd.addEventListener('click', closePopupAddOverlay);
+  document.addEventListener('keydown', closePopupAddEsc);
 }
 
 function openPopupImage(popupImage) {
   buttonCloseImage.addEventListener('click', closePopupImage);
   popupImage.classList.add('popup_opened');
   popupImage.addEventListener('click', closePopupImageOverlay);
+  document.addEventListener('keydown', closePopupImageEsc);
 }
 
 
@@ -187,7 +209,7 @@ const enableValidationEdit = () => {
       event.preventDefault();
       userName.textContent = inputUserName.value;
       userAbout.textContent = inputUserAbout.value;
-      closePopup(event);
+      closePopupEdit();
     });
     setEventEditListeners(formEdit);
   });
@@ -253,7 +275,7 @@ const enableValidationAdd = () => {
       event.preventDefault();
       createCard(inputPlaceUrl.value, inputPlaceName.value);
       formAdd.reset();
-      closePopup(event);
+      closePopupAdd();
     });
     setEventAddListeners(formAdd);
   });
