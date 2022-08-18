@@ -35,7 +35,7 @@ const userAbout = document.querySelector('.profile__text');
 const inputUserName = popupEdit.querySelector('#person-input');
 const inputUserAbout = popupEdit.querySelector('#about-input');
 const formEdit = popupEdit.querySelector('#edit');
-const formInputEdit = formEdit.querySelector('.form__input');
+const inputEdit = formEdit.querySelector('.form__input');
 
 
 // Pop-up add-button
@@ -44,7 +44,7 @@ const popupAdd = document.querySelector('#popupAdd');
 const inputPlaceName = popupAdd.querySelector('#place-input');
 const inputPlaceUrl = popupAdd.querySelector('#url-input');
 const formAdd = popupAdd.querySelector('#add');
-const formInputAdd = formAdd.querySelector('.form__input');
+const inputAdd = formAdd.querySelector('.form__input');
 
 
 // Images
@@ -94,39 +94,58 @@ buttonOpenEdit.addEventListener('click', function () {
 
 
 // Edit form
-const showInputEditError = (formEdit, formInputEdit, errorMessage) => {
-  const formEditError = formEdit.querySelector(`.${formInputEdit.id}-error`);
-  formInputEdit.classList.add('form__input_type_error');
+const showInputEditError = (formEdit, inputEdit, errorMessage) => {
+  const formEditError = formEdit.querySelector(`.${inputEdit.id}-error`);
+  inputEdit.classList.add('form__input_type-error');
   formEditError.textContent = errorMessage;
-  formEditError.classList.add('form__input-error');
+  formEditError.classList.add('.form__input-error');
 };
 
-const hideInputEditError = (formEdit, formInputEdit) => {
-  const formEditError = formEdit.querySelector(`.${formInputEdit.id}-error`);
-  formInputEdit.classList.remove('form__input_type_error');
-  formEditError.classList.remove('form__input-error');
+const hideInputEditError = (formEdit, inputEdit) => {
+  const formEditError = formEdit.querySelector(`.${inputEdit.id}-error`);
+  inputEdit.classList.remove('form__input_type-error');
+  formEditError.classList.remove('.form__input-error');
   formEditError.textContent = '';
 };
 
-const isValidEdit = (formEdit, formInputEdit) => {
-  if (!formInputEdit.validity.valid) {
-    showInputEditError(formEdit, formInputEdit, formInputEdit.validationMessage);
+const checkInputEditValidity = (formEdit, inputEdit) => {  
+  if (!inputEdit.validity.valid) {
+    showInputEditError(formEdit, inputEdit, inputEdit.validationMessage);
   } else {
-    hideInputEditError(formEdit, formInputEdit);
+    hideInputEditError(formEdit, inputEdit);
+  }
+};
+
+const hasInvalidInputEdit = (inputListEdit) => {
+  return inputListEdit.some((inputEdit) => {
+    return !inputEdit.validity.valid;
+  })
+};
+
+const toggleButtonStateEdit = (inputListEdit, buttonSubmitEdit) => {
+  if (hasInvalidInputEdit(inputListEdit)) {
+    buttonSubmitEdit.classList.add('form__submit-button_inactive');
+    buttonSubmitEdit.disabled = true;
+  } else {
+    buttonSubmitEdit.classList.remove('form__submit-button_inactive');
+    buttonSubmitEdit.disabled = false;
   }
 };
 
 const setEventEditListeners = (formEdit) => {
-  const inputEditList = Array.from(formEdit.querySelectorAll('.form__input'));
-  inputEditList.forEach((formInputEdit) => {
-    formInputEdit.addEventListener('input', () => {
-      isValidEdit(formEdit, formInputEdit);
+  const inputListEdit = Array.from(formEdit.querySelectorAll('.form__input'));
+  const buttonSubmitEdit = formEdit.querySelector('.form__submit-button');
+  toggleButtonStateEdit(inputListEdit, buttonSubmitEdit);
+  inputListEdit.forEach((inputEdit) => {
+    inputEdit.addEventListener('input', function () {
+      checkInputEditValidity(formEdit, inputEdit);
+      toggleButtonStateEdit(inputListEdit, buttonSubmitEdit);
     });
   });
 };
 
 const enableValidationEdit = () => {
-  const formListEdit = Array.from(popupEdit.querySelectorAll('#edit'));
+  const formListEdit = Array.from(document.querySelectorAll('#edit'));
   formListEdit.forEach((formEdit) => {
     formEdit.addEventListener('submit', function (event) {
       event.preventDefault();
@@ -141,33 +160,52 @@ enableValidationEdit();
 
 
 // Add form
-const showInputAddError = (formAdd, formInputAdd, errorMessage) => {
-  const formAddError = formAdd.querySelector(`.${formInputAdd.id}-error`);
-  formInputAdd.classList.add('form__input_type_error');
+const showInputAddError = (formAdd, inputAdd, errorMessage) => {
+  const formAddError = formAdd.querySelector(`.${inputAdd.id}-error`);
+  inputAdd.classList.add('form__input_type-error');
   formAddError.textContent = errorMessage;
-  formAddError.classList.add('form__input-error');
+  formAddError.classList.add('.form__input-error');
 };
 
-const hideInputAddError = (formAdd, formInputAdd) => {
-  const formAddError = formAdd.querySelector(`.${formInputAdd.id}-error`);
-  formInputAdd.classList.remove('form__input_type_error');
-  formAddError.classList.remove('form__input-error');
+const hideInputAddError = (formAdd, inputAdd) => {
+  const formAddError = formAdd.querySelector(`.${inputAdd.id}-error`);
+  inputAdd.classList.remove('form__input_type-error');
+  formAddError.classList.remove('.form__input-error');
   formAddError.textContent = '';
 };
 
-const isValidAdd = (formAdd, formInputAdd) => {
-  if (!formInputAdd.validity.valid) {
-    showInputAddError(formAdd, formInputAdd, formInputAdd.validationMessage);
+const checkInputAddValidity = (formAdd, inputAdd) => {
+  if (!inputAdd.validity.valid) {
+    showInputAddError(formAdd, inputAdd, inputAdd.validationMessage);
   } else {
-    hideInputAddError(formAdd, formInputAdd);
+    hideInputAddError(formAdd, inputAdd);
+  }
+};
+
+const hasInvalidInputAdd = (inputListAdd) => {
+  return inputListAdd.some((inputAdd) => {
+    return !inputAdd.validity.valid;
+  })
+};
+
+const toggleButtonStateAdd = (inputListAdd, buttonSubmitAdd) => {
+  if (hasInvalidInputAdd(inputListAdd)) {
+    buttonSubmitAdd.classList.add('form__submit-button_inactive');
+    buttonSubmitAdd.disabled = true;
+  } else {
+    buttonSubmitAdd.classList.remove('form__submit-button_inactive');
+    buttonSubmitAdd.disabled = false;
   }
 };
 
 const setEventAddListeners = (formAdd) => {
-  const inputAddList = Array.from(formAdd.querySelectorAll('.form__input'));
-  inputAddList.forEach((formInputAdd) => {
-    formInputAdd.addEventListener('input', () => {
-      isValidAdd(formAdd, formInputAdd);
+  const inputListAdd = Array.from(formAdd.querySelectorAll('.form__input'));
+  const buttonSubmitAdd = formAdd.querySelector('.form__submit-button');
+  toggleButtonStateAdd(inputListAdd, buttonSubmitAdd);
+  inputListAdd.forEach((inputAdd) => {
+    inputAdd.addEventListener('input', () => {
+      checkInputAddValidity(formAdd, inputAdd);
+      toggleButtonStateAdd(inputListAdd, buttonSubmitAdd);
     });
   });
 };
