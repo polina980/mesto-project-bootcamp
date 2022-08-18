@@ -36,6 +36,7 @@ const inputUserName = popupEdit.querySelector('#person-input');
 const inputUserAbout = popupEdit.querySelector('#about-input');
 const formEdit = popupEdit.querySelector('#edit');
 const inputEdit = formEdit.querySelector('.form__input');
+const buttonCloseEdit = popupEdit.querySelector('.popup__close-button');
 
 
 // Pop-up add-button
@@ -45,6 +46,7 @@ const inputPlaceName = popupAdd.querySelector('#place-input');
 const inputPlaceUrl = popupAdd.querySelector('#url-input');
 const formAdd = popupAdd.querySelector('#add');
 const inputAdd = formAdd.querySelector('.form__input');
+const buttonCloseAdd = popupAdd.querySelector('.popup__close-button');
 
 
 // Images
@@ -52,34 +54,68 @@ const popupImage = document.querySelector('#popupImage');
 const cardTemplate = document.querySelector('#card-template').content;
 const cardsContainer = document.querySelector('.cards');
 const cardNew = cardTemplate.querySelector('.card__input');
+const buttonCloseImage = popupImage.querySelector('.popup__close-button');
 
 
 // Function close pop-up
-function closePopup(event) {
-  const popup = event.target.closest('.popup');
-  popup.classList.remove('popup_opened');
+function closePopupEdit() {
+  popupEdit.classList.remove('popup_opened');
+  const buttonCloseEdit = popupEdit.querySelector('.popup__close-button');
+  buttonCloseEdit.removeEventListener('click', closePopupEdit);
+  popupEdit.removeEventListener('click', closePopupEditOverlay);
 }
 
+function closePopupEditOverlay(event) {
+  if (event.target === event.currentTarget) {
+    closePopupEdit();
+  }
+}
+
+function closePopupAdd() {
+  popupAdd.classList.remove('popup_opened');
+  const buttonCloseAdd = popupAdd.querySelector('.popup__close-button');
+  buttonCloseAdd.removeEventListener('click', closePopupAdd);
+  popupAdd.removeEventListener('click', closePopupAddOverlay);
+}
+
+function closePopupAddOverlay(event) {
+  if (event.target === event.currentTarget) {
+    closePopupAdd();
+  }
+}
+
+function closePopupImage() {
+  popupImage.classList.remove('popup_opened');
+  const buttonCloseImage = popupImage.querySelector('.popup__close-button');
+  buttonCloseImage.removeEventListener('click', closePopupImage);
+  popupImage.removeEventListener('click', closePopupImageOverlay);
+}
+
+function closePopupImageOverlay(event) {
+  if (event.target === event.currentTarget) {
+    closePopupImage();
+  }
+}
 
 // Function open pop-up
-function openPopupEdit(popup) {
-  const buttonClose = popup.querySelector('.popup__close-button');
-  buttonClose.addEventListener('click', closePopup);
-  popup.classList.add('popup_opened');
+function openPopupEdit(popupEdit) {
+  buttonCloseEdit.addEventListener('click', closePopupEdit);
+  popupEdit.classList.add('popup_opened');
   inputUserName.value = userName.textContent;
   inputUserAbout.value = userAbout.textContent;
+  popupEdit.addEventListener('click', closePopupEditOverlay);
 }
 
-function openPopupAdd(popup) {
-  const buttonClose = popup.querySelector('.popup__close-button');
-  buttonClose.addEventListener('click', closePopup);
-  popup.classList.add('popup_opened');
+function openPopupAdd(popupAdd) {
+  buttonCloseAdd.addEventListener('click', closePopupAdd);
+  popupAdd.classList.add('popup_opened');
+  popupAdd.addEventListener('click', closePopupAddOverlay);
 }
 
-function openPopupImage(popup) {
-  const buttonClose = popup.querySelector('.popup__close-button');
-  buttonClose.addEventListener('click', closePopup);
-  popup.classList.add('popup_opened');
+function openPopupImage(popupImage) {
+  buttonCloseImage.addEventListener('click', closePopupImage);
+  popupImage.classList.add('popup_opened');
+  popupImage.addEventListener('click', closePopupImageOverlay);
 }
 
 
