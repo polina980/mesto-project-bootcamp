@@ -166,7 +166,7 @@ const hideInputEditError = (formEdit, inputEdit) => {
   formEditError.textContent = '';
 };
 
-const checkInputEditValidity = (formEdit, inputEdit) => {  
+const isValidEdit = (formEdit, inputEdit) => {  
   if (!inputEdit.validity.valid) {
     showInputEditError(formEdit, inputEdit, inputEdit.validationMessage);
   } else {
@@ -196,7 +196,7 @@ const setEventEditListeners = (formEdit) => {
   toggleButtonStateEdit(inputListEdit, buttonSubmitEdit);
   inputListEdit.forEach((inputEdit) => {
     inputEdit.addEventListener('input', function () {
-      checkInputEditValidity(formEdit, inputEdit);
+      isValidEdit(formEdit, inputEdit);
       toggleButtonStateEdit(inputListEdit, buttonSubmitEdit);
     });
   });
@@ -232,7 +232,7 @@ const hideInputAddError = (formAdd, inputAdd) => {
   formAddError.textContent = '';
 };
 
-const checkInputAddValidity = (formAdd, inputAdd) => {
+const isValidAdd = (formAdd, inputAdd) => {
   if (!inputAdd.validity.valid) {
     showInputAddError(formAdd, inputAdd, inputAdd.validationMessage);
   } else {
@@ -262,7 +262,7 @@ const setEventAddListeners = (formAdd) => {
   toggleButtonStateAdd(inputListAdd, buttonSubmitAdd);
   inputListAdd.forEach((inputAdd) => {
     inputAdd.addEventListener('input', () => {
-      checkInputAddValidity(formAdd, inputAdd);
+      isValidAdd(formAdd, inputAdd);
       toggleButtonStateAdd(inputListAdd, buttonSubmitAdd);
     });
   });
@@ -271,7 +271,8 @@ const setEventAddListeners = (formAdd) => {
 const enableValidationAdd = () => {
   const formListAdd = Array.from(popupAdd.querySelectorAll('#add'));
   formListAdd.forEach((formAdd) => {
-    formAdd.addEventListener('submit', function (event) {
+    formAdd.addEventListener('submit',(event) => {
+      if formAdd
       event.preventDefault();
       createCard(inputPlaceUrl.value, inputPlaceName.value);
       formAdd.reset();
