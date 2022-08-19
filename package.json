@@ -1,0 +1,23 @@
+{
+  "name": "mesto-project-bootcamp",
+  "version": "1.0.0",
+  "description": "**Третья проектная работа, созданная на факультете \"Фронтенд-разработчик Bootcamp\", Яндекс.Практикум.**   Сервис \"Mesto\" - интерактивная страница, куда можно добавлять фотографии, удалять их и ставить лайки. Страница сверстана по макету из Figma и адаптирована под различные устройства (от 320px до 1280px и выше).",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PolinaShchepochkina/mesto-project-bootcamp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PolinaShchepochkina/mesto-project-bootcamp/issues"
+  },
+  "homepage": "https://github.com/PolinaShchepochkina/mesto-project-bootcamp#readme",
+  "dependencies": {
+    "jquery": "^3.6.0"
+  }
+}

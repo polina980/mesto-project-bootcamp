@@ -166,7 +166,7 @@ const hideInputEditError = (formEdit, inputEdit) => {
   formEditError.textContent = '';
 };
 
-const isValidEdit = (formEdit, inputEdit) => {  
+const checkInputValidityEdit = (formEdit, inputEdit) => {  
   if (!inputEdit.validity.valid) {
     showInputEditError(formEdit, inputEdit, inputEdit.validationMessage);
   } else {
@@ -196,7 +196,7 @@ const setEventEditListeners = (formEdit) => {
   toggleButtonStateEdit(inputListEdit, buttonSubmitEdit);
   inputListEdit.forEach((inputEdit) => {
     inputEdit.addEventListener('input', function () {
-      isValidEdit(formEdit, inputEdit);
+      checkInputValidityEdit(formEdit, inputEdit);
       toggleButtonStateEdit(inputListEdit, buttonSubmitEdit);
     });
   });
@@ -209,6 +209,9 @@ const enableValidationEdit = () => {
       event.preventDefault();
       userName.textContent = inputUserName.value;
       userAbout.textContent = inputUserAbout.value;
+      const inputListEdit = Array.from(formEdit.querySelectorAll('.form__input'));
+      const buttonSubmitEdit = formEdit.querySelector('.form__submit-button');
+      toggleButtonStateEdit(inputListEdit, buttonSubmitEdit);
       closePopupEdit();
     });
     setEventEditListeners(formEdit);
@@ -232,7 +235,7 @@ const hideInputAddError = (formAdd, inputAdd) => {
   formAddError.textContent = '';
 };
 
-const isValidAdd = (formAdd, inputAdd) => {
+const checkInputValidityAdd = (formAdd, inputAdd) => {
   if (!inputAdd.validity.valid) {
     showInputAddError(formAdd, inputAdd, inputAdd.validationMessage);
   } else {
@@ -262,7 +265,7 @@ const setEventAddListeners = (formAdd) => {
   toggleButtonStateAdd(inputListAdd, buttonSubmitAdd);
   inputListAdd.forEach((inputAdd) => {
     inputAdd.addEventListener('input', () => {
-      isValidAdd(formAdd, inputAdd);
+      checkInputValidityAdd(formAdd, inputAdd);
       toggleButtonStateAdd(inputListAdd, buttonSubmitAdd);
     });
   });
@@ -275,6 +278,9 @@ const enableValidationAdd = () => {
       event.preventDefault();
       createCard(inputPlaceUrl.value, inputPlaceName.value);
       formAdd.reset();
+      const inputListAdd = Array.from(formAdd.querySelectorAll('.form__input'));
+      const buttonSubmitAdd = formAdd.querySelector('.form__submit-button');
+      toggleButtonStateAdd(inputListAdd, buttonSubmitAdd);
       closePopupAdd();
     });
     setEventAddListeners(formAdd);
