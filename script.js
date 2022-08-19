@@ -272,7 +272,6 @@ const enableValidationAdd = () => {
   const formListAdd = Array.from(popupAdd.querySelectorAll('#add'));
   formListAdd.forEach((formAdd) => {
     formAdd.addEventListener('submit',(event) => {
-      if formAdd
       event.preventDefault();
       createCard(inputPlaceUrl.value, inputPlaceName.value);
       formAdd.reset();
