@@ -39,7 +39,7 @@ module.exports = {
           },
           'postcss-loader'
         ]
-      },
+      }
     ]
   },
   plugins: [
@@ -48,6 +48,5 @@ module.exports = {
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
-
   ]
 }
