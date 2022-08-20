@@ -1,3 +1,5 @@
+import './pages/index.css';
+
 // Массив cards
 const initialCards = [
   {
