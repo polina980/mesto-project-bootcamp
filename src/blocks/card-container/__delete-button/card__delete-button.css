@@ -1,4 +1,4 @@
-.card__trash-button {
+.card__delete-button {
   position: absolute;
   background-image: url(../../../images/trash.svg);
   background-color: transparent;
@@ -11,7 +11,7 @@
   z-index: 1;
 }
 
-.card__trash-button:hover {
+.card__delete-button:hover {
   opacity: .6;
   transition: opacity .5s ease-in;
 }

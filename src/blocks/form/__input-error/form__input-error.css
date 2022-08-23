@@ -1,6 +1,7 @@
 .form__input-error {
   display: block;
   position: absolute;
+  opacity: 1;
   margin: -25px 0 0;
   font-size: 12px;
   font-weight: 400;

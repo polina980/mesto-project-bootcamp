@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mesto</title>
 </head>
+
 <body class="page">
   <header class="header">
     <img class="header__logo" src="<%=require('./images/mesto-logo.svg')%>" alt="Логотип Mesto">
@@ -23,7 +25,7 @@
     <section class="card-container">
       <ul class="cards"></ul>
     </section>
-  
+
   </main>
   <footer class="footer">
     <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
@@ -51,7 +53,8 @@
       <h2 class="form__title">Новое место</h2>
       <form class="form" id="add" method="post" novalidate>
         <fieldset class="form__set">
-          <input type="text" class="form__input" placeholder="Название" id="place-input" minlength="2" maxlength="30" required>
+          <input type="text" class="form__input" placeholder="Название" id="place-input" minlength="2" maxlength="30"
+            required>
           <span class="form__input-error place-input-error"></span>
           <input type="url" class="form__input" placeholder="Ссылка на картинку" id="url-input" required>
           <span class="form__input-error url-input-error"></span>
@@ -74,7 +77,7 @@
   <template id="card-template">
     <li class="card__item">
       <img class="card__image" src="" alt="">
-      <button class="card__trash-button" type="reset" aria-label="Корзина"></button>
+      <button class="card__delete-button" type="reset" aria-label="Корзина"></button>
       <div class="card__group">
         <h2 class="card__title"></h2>
         <button class="card__like-button" type="button" aria-label="Нравится"></button>
@@ -83,4 +86,5 @@
   </template>
 
 </body>
+
 </html>
