@@ -1,20 +1,22 @@
 export const formElement = document.querySelector('.form');
+export const inputElement = document.querySelector('.form__input');
+export const buttonSubmit = document.querySelector('.form__submit-button');
 
-export const showInputError = (inputElement, errorMessage, selectors) => {
+export function showInputError(inputElement, errorMessage, selectors) {
   const formError = document.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(selectors.inputErrorClass);
   formError.classList.add(selectors.errorClass);
   formError.textContent = errorMessage;
 };
 
-export const hideInputError = (inputElement, selectors) => {
+export function hideInputError(inputElement, selectors) {
   const formError = document.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.remove(selectors.inputErrorClass);
   formError.classList.remove(selectors.errorClass);
   formError.textContent = '';
 };
 
-export const checkInputValidity = (inputElement, selectors) => {
+export function checkInputValidity(inputElement, selectors) {
   if (!inputElement.validity.valid) {
     showInputError(inputElement, inputElement.validationMessage, selectors);
   } else {
@@ -22,33 +24,41 @@ export const checkInputValidity = (inputElement, selectors) => {
   }
 };
 
-export const hasInvalidInput = (inputList) => {
-  return inputList.some((inputElement) => {
+export function hasInvalidInput(inputList) {
+  return inputList.some(function (inputElement) {
     return !inputElement.validity.valid;
   })
 };
 
-export function revalidateForm (formElement, selectors) {
+export function revalidateForm(formElement, selectors) {
   const inputList = Array.from(formElement.querySelectorAll(selectors.inputSelector));
   const buttonSubmit = formElement.querySelector(selectors.submitButtonSelector);
   inputList.forEach(function (inputElement) {
     hideInputError(inputElement, selectors);
   });
-  toggleButtonState(inputList, buttonSubmit, selectors);
+  inactiveSubmitButton(buttonSubmit, selectors);
 };
 
-export const toggleButtonState = (inputList, buttonSubmit, selectors) => {
+export function inactiveSubmitButton(buttonSubmit, { inactiveButtonClass }) {
+  buttonSubmit.classList.add(inactiveButtonClass);
+  buttonSubmit.disabled = true;
+};
+
+export function activeSubmitButton(buttonSubmit, { inactiveButtonClass }) {
+  buttonSubmit.classList.remove(inactiveButtonClass);
+  buttonSubmit.disabled = false;
+};
+
+export function toggleButtonState(inputList, buttonSubmit, selectors) {
   if (hasInvalidInput(inputList)) {
-    buttonSubmit.classList.add(selectors.inactiveButtonClass);
-    buttonSubmit.disabled = true;
+    inactiveSubmitButton(buttonSubmit, selectors);
   } else {
-    buttonSubmit.classList.remove(selectors.inactiveButtonClass);
-    buttonSubmit.disabled = false;
+    activeSubmitButton(buttonSubmit, selectors);
   }
 };
 
-export const setEventListeners = (selectors) => {
-  const inputList = Array.from(formElement.querySelectorAll(selectors.formSelector));
+export function setEventListeners(formElement, selectors) {
+  const inputList = Array.from(formElement.querySelectorAll(selectors.inputSelector));
   const buttonSubmit = formElement.querySelector(selectors.submitButtonSelector);
   toggleButtonState(inputList, buttonSubmit, selectors);
   inputList.forEach(function (inputElement) {
@@ -59,7 +69,7 @@ export const setEventListeners = (selectors) => {
   });
 };
 
-export function enableValidation (selectors) {
+export function enableValidation(selectors) {
   const formList = Array.from(document.querySelectorAll(selectors.formSelector));
   formList.forEach(function (formElement) {
     setEventListeners(formElement, selectors);

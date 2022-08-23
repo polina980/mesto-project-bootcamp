@@ -1,5 +1,5 @@
 import { closePopup } from './utils.js';
-import { createCard } from './card';
+import { createCard } from './card.js';
 
 export const userName = document.querySelector('.profile__title');
 export const userAbout = document.querySelector('.profile__text');

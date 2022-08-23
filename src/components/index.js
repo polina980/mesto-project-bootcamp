@@ -1,14 +1,14 @@
 import '../pages/index.css';
 
 import { initialCards } from './data.js';
-import { createCard, popupImage } from './card';
+import { createCard, popupImage } from './card.js';
 import { closePopup, openPopup, closePopupOverlay } from './utils.js';
 import { revalidateForm, enableValidation } from './validate.js';
 import {
   userName, userAbout,
   inputUserName, inputUserAbout,
   inputPlaceName, inputPlaceUrl,
-  submitFormEdit, submitFormAdd, 
+  submitFormEdit, submitFormAdd,
   popupAdd, popupEdit
 } from './modal.js';
 

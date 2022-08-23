@@ -1,5 +1,6 @@
 import { openPopup } from "./utils";
 
+
 export const popupImage = document.querySelector('#popupImage');
 
 export function createCard(cardLink, cardName) {

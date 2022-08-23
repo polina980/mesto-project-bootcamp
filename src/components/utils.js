@@ -6,8 +6,8 @@ export function openPopup(popup) {
   popup.classList.add('popup_opened');
 };
 
-export function closePopupOverlay(event) {
-  if (event.target === event.currentTarget) {
+export function closePopupOverlay(popup) {
+  if (popup.target === popup.currentTarget) {
     const popup = document.querySelector('.popup_opened');
     closePopup(popup);
   }
