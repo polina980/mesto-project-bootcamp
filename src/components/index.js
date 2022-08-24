@@ -2,7 +2,7 @@ import '../pages/index.css';
 
 import { initialCards } from './data.js';
 import { createCard, popupImage } from './card.js';
-import { closePopup, openPopup, closePopupOverlay } from './utils.js';
+import { closePopup, openPopup } from './utils.js';
 import { revalidateForm, enableValidation } from './validate.js';
 import {
   userName, userAbout,
@@ -10,7 +10,7 @@ import {
   inputPlaceName, inputPlaceUrl,
   submitFormEdit, submitFormAdd,
   popupAdd, popupEdit,
-  cardsContainer
+  closePopupOverlay, cardsContainer
 } from './modal.js';
 
 const mestoSelectors = {

@@ -23,3 +23,17 @@ export function submitFormAdd(event) {
   cardsContainer.insertAdjacentElement('afterbegin', createCard(inputPlaceUrl.value, inputPlaceName.value));
   closePopup(popupAdd);
 };
+
+export function closePopupOverlay(popup) {
+  if (popup.target === popup.currentTarget) {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
+};
+
+export function closePopupEsc(event) {
+  if (event.key === 'Escape') {
+    const popup = document.querySelector('.popup_opened');
+    closePopup(popup);
+  }
+};
