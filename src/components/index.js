@@ -9,7 +9,8 @@ import {
   inputUserName, inputUserAbout,
   inputPlaceName, inputPlaceUrl,
   submitFormEdit, submitFormAdd,
-  popupAdd, popupEdit
+  popupAdd, popupEdit,
+  cardsContainer
 } from './modal.js';
 
 const mestoSelectors = {
@@ -25,7 +26,6 @@ const buttonOpenEdit = document.querySelector('.profile__edit-button');
 const buttonOpenAdd = document.querySelector('.profile__add-button');
 const formEdit = document.querySelector('#edit');
 const formAdd = document.querySelector('#add');
-const cardsContainer = document.querySelector('.cards');
 const buttonCloseAdd = popupAdd.querySelector('.popup__close-button');
 const buttonCloseEdit = popupEdit.querySelector('.popup__close-button');
 const buttonCloseImage = popupImage.querySelector('.popup__close-button');
@@ -66,12 +66,5 @@ buttonCloseImage.addEventListener('click', function () {
 popupEdit.addEventListener('click', closePopupOverlay);
 popupAdd.addEventListener('click', closePopupOverlay);
 popupImage.addEventListener('click', closePopupOverlay);
-
-document.addEventListener('keydown', function (event) {
-  if (event.key === 'Escape') {
-    const popup = document.querySelector('.popup_opened');
-    closePopup(popup);
-  }
-});
 
 enableValidation(mestoSelectors);

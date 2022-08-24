@@ -9,6 +9,7 @@ export const inputPlaceName = document.querySelector('#place-input');
 export const inputPlaceUrl = document.querySelector('#url-input');
 export const popupEdit = document.querySelector('#popupEdit');
 export const popupAdd = document.querySelector('#popupAdd');
+export const cardsContainer = document.querySelector('.cards');
 
 export function submitFormEdit(event) {
   event.preventDefault();
@@ -19,6 +20,6 @@ export function submitFormEdit(event) {
 
 export function submitFormAdd(event) {
   event.preventDefault();
-  createCard(inputPlaceUrl.value, inputPlaceName.value);
+  cardsContainer.insertAdjacentElement('afterbegin', createCard(inputPlaceUrl.value, inputPlaceName.value));
   closePopup(popupAdd);
 };
