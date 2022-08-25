@@ -1,7 +1,3 @@
-export const formElement = document.querySelector('.form');
-export const inputElement = document.querySelector('.form__input');
-export const buttonSubmit = document.querySelector('.form__submit-button');
-
 export function showInputError(inputElement, errorMessage, selectors) {
   const formError = document.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(selectors.inputErrorClass);

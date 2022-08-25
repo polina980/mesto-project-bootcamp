@@ -1,7 +1,4 @@
-import { openPopup } from "./utils";
-
-
-export const popupImage = document.querySelector('#popupImage');
+import { openPopup } from './modal.js';
 
 export function createCard(cardLink, cardName) {
   const cardTemplate = document.querySelector('#card-template').content;

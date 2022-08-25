@@ -1,16 +1,20 @@
 import '../pages/index.css';
 
-import { initialCards } from './data.js';
-import { createCard, popupImage } from './card.js';
-import { closePopup, openPopup } from './utils.js';
-import { revalidateForm, enableValidation } from './validate.js';
 import {
+  popupEdit, popupAdd, popupImage,
+  buttonOpenEdit, buttonOpenAdd,
+  formEdit, formAdd,
   userName, userAbout,
   inputUserName, inputUserAbout,
-  inputPlaceName, inputPlaceUrl,
-  submitFormEdit, submitFormAdd,
-  popupAdd, popupEdit,
-  closePopupOverlay, cardsContainer
+  inputPlaceName, inputPlaceUrl, cardsContainer,
+  buttonCloseAdd, buttonCloseEdit, buttonCloseImage
+} from './variables.js';
+import { initialCards } from './data.js';
+import { createCard } from './card.js';
+import { revalidateForm, enableValidation } from './validate.js';
+import {
+  closePopup, openPopup,
+  closePopupOverlay
 } from './modal.js';
 
 const mestoSelectors = {
@@ -22,49 +26,53 @@ const mestoSelectors = {
   errorClass: 'form__input-error_active',
 };
 
-const buttonOpenEdit = document.querySelector('.profile__edit-button');
-const buttonOpenAdd = document.querySelector('.profile__add-button');
-const formEdit = document.querySelector('#edit');
-const formAdd = document.querySelector('#add');
-const buttonCloseAdd = popupAdd.querySelector('.popup__close-button');
-const buttonCloseEdit = popupEdit.querySelector('.popup__close-button');
-const buttonCloseImage = popupImage.querySelector('.popup__close-button');
-
 initialCards.forEach(function (element) {
   cardsContainer.prepend(createCard(element.link, element.name));
 });
 
+buttonOpenEdit.addEventListener('click', openPopupEdit);
+buttonOpenAdd.addEventListener('click', openPopupAdd);
 formEdit.addEventListener('submit', submitFormEdit);
 formAdd.addEventListener('submit', submitFormAdd);
-
-buttonOpenEdit.addEventListener('click', function () {
-  inputUserName.value = userName.textContent;
-  inputUserAbout.value = userAbout.textContent;
-  revalidateForm(formEdit, mestoSelectors);
-  openPopup(popupEdit);
-});
-
-buttonOpenAdd.addEventListener('click', function () {
-  inputPlaceName.value = '';
-  inputPlaceUrl.value = '';
-  revalidateForm(formAdd, mestoSelectors);
-  openPopup(popupAdd);
-});
+popupEdit.addEventListener('click', closePopupOverlay);
+popupAdd.addEventListener('click', closePopupOverlay);
+popupImage.addEventListener('click', closePopupOverlay);
 
 buttonCloseEdit.addEventListener('click', function () {
   closePopup(popupEdit);
 });
-
 buttonCloseAdd.addEventListener('click', function () {
   closePopup(popupAdd);
 });
-
 buttonCloseImage.addEventListener('click', function () {
   closePopup(popupImage);
 });
 
-popupEdit.addEventListener('click', closePopupOverlay);
-popupAdd.addEventListener('click', closePopupOverlay);
-popupImage.addEventListener('click', closePopupOverlay);
+function submitFormEdit(event) {
+  event.preventDefault();
+  userName.textContent = inputUserName.value;
+  userAbout.textContent = inputUserAbout.value;
+  closePopup(popupEdit);
+};
+
+function submitFormAdd(event) {
+  event.preventDefault();
+  cardsContainer.prepend(createCard(inputPlaceUrl.value, inputPlaceName.value));
+  closePopup(popupAdd);
+};
+
+function openPopupEdit() {
+  inputUserName.value = userName.textContent;
+  inputUserAbout.value = userAbout.textContent;
+  revalidateForm(formEdit, mestoSelectors);
+  openPopup(popupEdit);
+};
+
+function openPopupAdd() {
+  inputPlaceName.value = '';
+  inputPlaceUrl.value = '';
+  revalidateForm(formAdd, mestoSelectors);
+  openPopup(popupAdd);
+};
 
 enableValidation(mestoSelectors);
