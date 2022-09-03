@@ -1,0 +1,4 @@
+.card__like-counter {
+  grid-area: like-counter;
+  margin: 2px auto auto;
+}

@@ -1,8 +1,10 @@
 .card__group {
   display: grid;
   grid-template-areas:
-  "title like-button";
+  "title like-button"
+  "title like-counter";
   grid-template-columns: 224px 22px;
   max-width: 246px;
   margin: 0 auto;
+  padding-top: 5px;
 }

@@ -1,21 +1,18 @@
 /* 320px */
 .popup__container {
-  position: inherit;
-  max-width: 282px;
+  position: relative;
+  width: 282px;
   max-height: 322px;
+  min-height: 181px;
   background-color: #fff;
   border-radius: 10px;
-  margin: auto;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
 }
 
 /* 768px 1024px 1280px */
 @media screen and (min-width: 768px) {
   .popup__container {
-    max-width: 430px;
+    width: 430px;
     max-height: 330px;
+    min-height: 181px;
   }
 }

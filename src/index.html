@@ -13,11 +13,11 @@
   </header>
   <main class="content">
     <section class="profile">
-      <img class="profile__image" src="<%=require('./images/cousteau.jpg')%>" alt="Портрет Кусто">
+      <div class="profile__image"></div>
       <div class="profile__info">
-        <h1 class="profile__title">Полина Щепочкина</h1>
+        <h1 class="profile__title"></h1>
         <button class="profile__edit-button" type="button" aria-label="Редактировать профиль"></button>
-        <p class="profile__text">Исследователь JavaScript</p>
+        <p class="profile__text"></p>
       </div>
       <button class="profile__add-button" type="button" aria-label="Добавить фотографии"></button>
     </section>
@@ -30,6 +30,20 @@
   <footer class="footer">
     <p class="footer__copyright">&copy; 2022 Mesto Russia</p>
   </footer>
+
+  <section class="popup" id="popupAvatar">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <h2 class="form__title">Обновить аватар</h2>
+      <form class="form" id="avatar" method="post" novalidate>
+        <fieldset class="form__set">
+          <input type="url" class="form__input" placeholder="Ссылка на картинку" id="url-avatar" required>
+          <span class="form__input-error url-avatar-error"></span>
+        </fieldset>
+        <button class="form__submit-button" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </section>
 
   <section class="popup" id="popupEdit">
     <div class="popup__container">
@@ -64,6 +78,16 @@
     </div>
   </section>
 
+  <!-- <section class="popup" id="popupDelete">
+    <div class="popup__container">
+      <button class="popup__close-button" type="button"></button>
+      <h2 class="form__title">Вы уверены?</h2>
+      <form class="form" id="delete" method="post" novalidate>
+        <button class="form__submit-button" type="submit">Да</button>
+      </form>
+    </div>
+  </section> -->
+
   <section class="popup popup_darker" id="popupImage">
     <div class="popup__container popup__container_full">
       <button class="popup__close-button" type="button"></button>
@@ -81,6 +105,7 @@
       <div class="card__group">
         <h2 class="card__title"></h2>
         <button class="card__like-button" type="button" aria-label="Нравится"></button>
+        <div class="card__like-counter">0</div>
       </div>
     </li>
   </template>
