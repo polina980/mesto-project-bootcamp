@@ -1,4 +1,4 @@
-import { handleLikeCard, handleDislikeCard, handleDeleteCard, userId, dislikeCard, likeCard } from "./api.js";
+import { likeCard, dislikeCard, userId, deleteServerCard } from "./api.js";
 import { openPopup } from "./modal.js";
 import { popupImage, popupImg, popupTxt } from "./variables.js";
 
@@ -16,20 +16,11 @@ export function createCard(card) {
   cardNew.querySelector('.card__title').textContent = card.name;
   cardNew.querySelector('.card__like-counter').textContent = card.likes.length;
   ///Like///
-  cardLikeButton.addEventListener('click', function () {
-    if (cardLikeButton.classList.contains('card__like-button_active')) {
-      handleDislikeCard(cardNew);
-    } else {
-      handleLikeCard(cardNew);
-    }
-  })
+  cardLikeButton.addEventListener('click', likedCard)
   ///Delete///
+  cardDeleteButton.addEventListener('click', deleteCard)
   if (cardNew.ownerId !== userId) {
-    cardDeleteButton.remove();
-  } else {
-    cardDeleteButton.addEventListener('click', function () {
-      handleDeleteCard(cardNew)
-    })
+    cardDeleteButton.remove()
   }
   ///Full Image///
   cardImage.addEventListener('click', function () {
@@ -41,3 +32,26 @@ export function createCard(card) {
   ///New card///
   return cardNew;
 };
+
+
+export function deleteCard(card) {
+  return deleteServerCard(card.target.closest('.card__item').id)
+    .then(() => {
+      card.target.closest('.card__item').remove();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+}
+
+export function likedCard(card) {
+  if (card.target.classList.contains('card__like-button_active')) {
+    dislikeCard(userId, card.target.closest('.card__item').id);
+    card.target.classList.remove('card__like-button_active');
+    card.target.closest('.card__item').querySelector('.card__like-counter').textContent = Number(card.target.closest('.card__item').querySelector('.card__like-counter').textContent) - 1;
+  } else {
+    likeCard(userId, card.target.closest('.card__item').id);
+    card.target.classList.add('card__like-button_active');
+    card.target.closest('.card__item').querySelector('.card__like-counter').textContent = Number(card.target.closest('.card__item').querySelector('.card__like-counter').textContent) + 1;
+  }
+}
