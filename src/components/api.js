@@ -110,10 +110,13 @@ export function postNewCard() {
 }
 
 ////////////////Удаление только своей карточки/////////////////
-export function deleteCard(id) {
-  return fetch(`${config.baseUrl}/cards/${id}`, {
+export function deleteCard(cardId) {
+  return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: 'DELETE',
     headers: config.headers,
+    body: JSON.stringify({
+      id: cardId
+    })
   })
     .then(handleResponse)
 }
@@ -129,15 +132,23 @@ export function handleDeleteCard(card) {
 }
 
 ////////////////////Добавление лайка///////////////////
-export function likeCard(id) {
-  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
+export function likeCard(userId, cardId) {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'PUT',
     headers: config.headers,
+    body: JSON.stringify({
+      id: cardId,
+      likes: userId
+    })
   })
     .then(handleResponse)
+}
+
+export function handleLikeCard(card) {
+  return likeCard(userId, card.id)
     .then(() => {
-      const cardLikeButton = cardNew.querySelector('.card__like-button');
-      const likesCounter = cardNew.querySelector('.card__like-counter');
+      const cardLikeButton = document.querySelector('.card__like-button');
+      const likesCounter = document.querySelector('.card__like-counter');
       cardLikeButton.classList.add('card__like-button_active');
       likesCounter.textContent = Number(likesCounter.textContent) + 1;
     })
@@ -147,15 +158,23 @@ export function likeCard(id) {
 }
 
 //////////////////Удаление лайка///////////////////
-export function dislikeCard(id) {
-  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
+export function dislikeCard(userId, cardId) {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'DELETE',
     headers: config.headers,
+    body: JSON.stringify({
+      id: cardId,
+      likes: userId
+    })
   })
     .then(handleResponse)
+}
+
+export function handleDislikeCard(card) {
+  return dislikeCard(userId, card.id)
     .then(() => {
-      const cardLikeButton = cardNew.querySelector('.card__like-button');
-      const likesCounter = cardNew.querySelector('.card__like-counter');
+      const cardLikeButton = document.querySelector('.card__like-button');
+      const likesCounter = document.querySelector('.card__like-counter');
       cardLikeButton.classList.remove('card__like-button_active');
       likesCounter.textContent = Number(likesCounter.textContent) - 1;
     })
@@ -163,13 +182,3 @@ export function dislikeCard(id) {
       console.log(err);
     })
 }
-
-// function toggleText(button) {
-//   var el = document.getElementById(button_id);
-//    if (document.getElementById('button_id').textContent == "Сохранить") 
-//    {
-//     document.getElementById('button_id').textContent = "Сохранить";
-//    } else {
-//     document.getElementById('button_id').textContent = "Сохранение...";
-//    }
-// }

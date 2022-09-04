@@ -1,4 +1,4 @@
-import { likeCard, dislikeCard, handleDeleteCard, userId } from "./api.js";
+import { handleLikeCard, handleDislikeCard, handleDeleteCard, userId, dislikeCard, likeCard } from "./api.js";
 import { openPopup } from "./modal.js";
 import { popupImage, popupImg, popupTxt } from "./variables.js";
 
@@ -9,21 +9,18 @@ export function createCard(card) {
   const cardImage = cardNew.querySelector('.card__image');
   const cardDeleteButton = cardNew.querySelector('.card__delete-button');
   const cardLikeButton = cardNew.querySelector('.card__like-button');
-  const likesCounter = cardNew.querySelector('.card__like-counter');
   cardImage.src = card.link;
   cardImage.alt = card.name;
   cardNew.id = card._id;
-  cardNew.likes = card.likes.length;
   cardNew.ownerId = card.owner._id;
   cardNew.querySelector('.card__title').textContent = card.name;
+  cardNew.querySelector('.card__like-counter').textContent = card.likes.length;
   ///Like///
   cardLikeButton.addEventListener('click', function () {
-    if (cardLikeButton.classList.contains('card__like-button_active')) { //dislike
-      cardLikeButton.classList.remove('card__like-button_active');
-      likesCounter.textContent = Number(likesCounter.textContent) - 1;
-    } else { //like
-      cardLikeButton.classList.add('card__like-button_active');
-      likesCounter.textContent = Number(likesCounter.textContent) + 1;
+    if (cardLikeButton.classList.contains('card__like-button_active')) {
+      handleDislikeCard(cardNew);
+    } else {
+      handleLikeCard(cardNew);
     }
   })
   ///Delete///

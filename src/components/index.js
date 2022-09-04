@@ -10,8 +10,8 @@ import {
   buttonCloseAvatar, buttonCloseAdd, buttonCloseEdit, buttonCloseImage,
   cardsContainer
 } from './variables.js';
-import { initialCards } from './data.js';
-import { createCard } from './card.js';
+// import { initialCards } from './data.js';
+// import { createCard } from './card.js';
 import { revalidateForm, enableValidation } from './validate.js';
 import {
   closePopup, openPopup,
@@ -124,11 +124,8 @@ getServerInitialCards();
 
 //       Лайк
 
-//       Карточки
-//     initialCards.forEach(function (card) {
-//       cardsContainer.prepend(createCard(card));
-//     });
-//   }
+//       Карточки?
+
 // })
 // .catch((err) => {
 //   console.log(err);
