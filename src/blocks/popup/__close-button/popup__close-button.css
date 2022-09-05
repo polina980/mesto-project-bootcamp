@@ -3,6 +3,7 @@
   position: absolute;
   background-image: url(../../../images/close-icon.svg);
   background-size: contain;
+  background-repeat: no-repeat;
   top: -36px;
   right: 0;
   border: none;
