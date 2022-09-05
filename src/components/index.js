@@ -7,11 +7,10 @@ import {
   inputAvatarUrl,
   userName, userAbout, inputUserName, inputUserAbout,
   inputPlaceName, inputPlaceUrl,
-  buttonCloseAvatar, buttonCloseAdd, buttonCloseEdit, buttonCloseImage,
-  cardsContainer
+  buttonCloseAvatar, buttonCloseAdd, buttonCloseEdit, buttonCloseImage
 } from './variables.js';
 // import { initialCards } from './data.js';
- import { createCard } from './card.js';
+// import { createCard } from './card.js';
 import { revalidateForm, enableValidation } from './validate.js';
 import {
   closePopup, openPopup,
@@ -106,7 +105,7 @@ enableValidation(mestoSelectors);
 getServerUserData();
 getServerInitialCards();
 
-/////////////API/////////////
+/////////////API///////////// аааааааааааааа :(
 // export let userId;
 
 // Promise.all([getServerUserData(), getServerInitialCards()])
