@@ -2,7 +2,8 @@ import {
   profileAvatar, userName, userAbout,
   cardsContainer, inputAvatarUrl,
   inputUserName, inputUserAbout,
-  inputPlaceName, inputPlaceUrl
+  inputPlaceName, inputPlaceUrl, popupAvatar, popupEdit, popupAdd,
+
 } from "./variables.js";
 import { createCard } from "./card.js";
 
@@ -16,14 +17,27 @@ const config = {
   }
 }
 
-function handleResponse(res) {
+export function handleResponse(res) {
   if (res.ok) {
     return res.json();
   }
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-//////////Загрузка информации о пользователе с сервера//////////
+export function handleError(err) {
+  console.log(err);
+};
+
+function savingPopup(saving, popup) {
+  const popupSave = popup.querySelector('.form__submit-button')
+  if (saving) {
+    popupSave.textContent = 'Сохранение...'
+  } else {
+    popupSave.textContent = 'Сохранить'
+  }
+}
+
+////Загрузка информации о пользователе с сервера////
 export function getServerUserData() {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers,
@@ -35,12 +49,10 @@ export function getServerUserData() {
       userAbout.textContent = result.about;
       profileAvatar.style.backgroundImage = `url(${result.avatar})`;
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch(handleError);
 }
 
-/////////////////Загрузка карточек с сервера/////////////////
+////Загрузка карточек с сервера////
 export function getServerInitialCards() {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers,
@@ -52,13 +64,12 @@ export function getServerInitialCards() {
       }
       console.log(result)
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch(handleError);
 }
 
-///////////////////Редактирование профиля///////////////////
+////Редактирование профиля////
 export function patchUserData() {
+  savingPopup(true, popupEdit)
   return fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
     headers: config.headers,
@@ -69,13 +80,15 @@ export function patchUserData() {
   })
     .then(handleResponse)
     .then(getServerUserData)
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch(handleError)
+    .finally(function () {
+      savingPopup(false, popupEdit)
+    })
 }
 
-//////////////Обновление аватара пользователя//////////////
+////Обновление аватара пользователя////
 export function patchUserAvatar() {
+  savingPopup(true, popupAvatar)
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: config.headers,
@@ -85,13 +98,15 @@ export function patchUserAvatar() {
   })
     .then(handleResponse)
     .then(getServerUserData)
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch(handleError)
+    .finally(function () {
+      savingPopup(false, popupAvatar)
+    })
 }
 
-////////////////Добавление новой карточки/////////////////
+////Добавление новой карточки////
 export function postNewCard() {
+  savingPopup(true, popupAdd)
   return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
     headers: config.headers,
@@ -104,12 +119,13 @@ export function postNewCard() {
     .then((result) => {
       cardsContainer.prepend(createCard(result));
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch(handleError)
+    .finally(function () {
+      savingPopup(false, popupAdd)
+    })
 }
 
-////////////////Удаление только своей карточки/////////////////
+////Удаление только своей карточки////
 export function deleteServerCard(cardId) {
   return fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: 'DELETE',
@@ -121,7 +137,7 @@ export function deleteServerCard(cardId) {
     .then(handleResponse)
 }
 
-////////////////////Добавление лайка///////////////////
+////Добавление лайка////
 export function likeCard(userId, cardId) {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'PUT',
@@ -134,7 +150,7 @@ export function likeCard(userId, cardId) {
     .then(handleResponse)
 }
 
-//////////////////Удаление лайка///////////////////
+////Удаление лайка////
 export function dislikeCard(userId, cardId) {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
     method: 'DELETE',

@@ -1,7 +1,6 @@
-import { likeCard, dislikeCard, userId, deleteServerCard } from "./api.js";
+import { handleError, userId, likeCard, dislikeCard, deleteServerCard } from "./api.js";
 import { openPopup } from "./modal.js";
 import { popupImage, popupImg, popupTxt } from "./variables.js";
-
 
 export function createCard(card) {
   const cardTemplate = document.querySelector('#card-template').content;
@@ -9,49 +8,57 @@ export function createCard(card) {
   const cardImage = cardNew.querySelector('.card__image');
   const cardDeleteButton = cardNew.querySelector('.card__delete-button');
   const cardLikeButton = cardNew.querySelector('.card__like-button');
+  const likeCounter = cardNew.querySelector('.card__like-counter')
   cardImage.src = card.link;
   cardImage.alt = card.name;
   cardNew.id = card._id;
-  cardNew.ownerId = card.owner._id;
   cardNew.querySelector('.card__title').textContent = card.name;
   cardNew.querySelector('.card__like-counter').textContent = card.likes.length;
-  ///Like///
-  cardLikeButton.addEventListener('click', likedCard)
-  ///Delete///
-  cardDeleteButton.addEventListener('click', deleteCard)
-  if (cardNew.ownerId !== userId) {
+  ////Like////
+  cardLikeButton.addEventListener('click', function () {
+    likedCard(cardNew, cardLikeButton, likeCounter)
+  })
+  for (let i = 0; i < card.likes.length; i++) {
+    if (card.likes[i]._id === userId) {
+      cardLikeButton.classList.add('card__like-button_active');
+    }
+  }
+  ////Delete////
+  cardDeleteButton.addEventListener('click', function () {
+    deleteCard(cardNew)
+  })
+  if (card.owner._id !== userId) {
     cardDeleteButton.remove()
   }
-  ///Full Image///
+  ////Full Image////
   cardImage.addEventListener('click', function () {
     popupImg.src = card.link;
     popupImg.alt = card.name;
     popupTxt.textContent = card.name;
     openPopup(popupImage);
   });
-  ///New card///
+  ////New card////
   return cardNew;
 };
 
-
-export function deleteCard(card) {
-  return deleteServerCard(card.target.closest('.card__item').id)
+////Delete////
+export function deleteCard(cardNew) {
+  return deleteServerCard(cardNew.id)
     .then(() => {
-      card.target.closest('.card__item').remove();
+      cardNew.remove();
     })
-    .catch((err) => {
-      console.log(err);
-    })
+    .catch(handleError)
 }
 
-export function likedCard(card) {
-  if (card.target.classList.contains('card__like-button_active')) {
-    dislikeCard(userId, card.target.closest('.card__item').id);
-    card.target.classList.remove('card__like-button_active');
-    card.target.closest('.card__item').querySelector('.card__like-counter').textContent = Number(card.target.closest('.card__item').querySelector('.card__like-counter').textContent) - 1;
+////Like////
+export function likedCard(cardNew, cardLikeButton, likeCounter) {
+  if (cardLikeButton.classList.contains('card__like-button_active')) {
+    dislikeCard(userId, cardNew.id);
+    cardLikeButton.classList.remove('card__like-button_active');
+    likeCounter.textContent = Number(likeCounter.textContent) - 1;
   } else {
-    likeCard(userId, card.target.closest('.card__item').id);
-    card.target.classList.add('card__like-button_active');
-    card.target.closest('.card__item').querySelector('.card__like-counter').textContent = Number(card.target.closest('.card__item').querySelector('.card__like-counter').textContent) + 1;
+    likeCard(userId, cardNew.id);
+    cardLikeButton.classList.add('card__like-button_active');
+    likeCounter.textContent = Number(likeCounter.textContent) + 1;
   }
 }

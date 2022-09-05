@@ -11,7 +11,7 @@ import {
   cardsContainer
 } from './variables.js';
 // import { initialCards } from './data.js';
-// import { createCard } from './card.js';
+ import { createCard } from './card.js';
 import { revalidateForm, enableValidation } from './validate.js';
 import {
   closePopup, openPopup,
@@ -19,7 +19,8 @@ import {
 } from './modal.js';
 import {
   getServerUserData, getServerInitialCards,
-  patchUserData, patchUserAvatar, postNewCard
+  patchUserData, patchUserAvatar, postNewCard,
+  userId
 } from './api.js';
 
 const mestoSelectors = {
@@ -109,22 +110,16 @@ getServerInitialCards();
 // export let userId;
 
 // Promise.all([getServerUserData(), getServerInitialCards()])
-//   .then((values) => {
-//     const userData = values[0];
-//     const card = values[1];
+//   .then((result) => {
+//     userId = result._id;
+//     userName.textContent = result.name;
+//     userAbout.textContent = result.about;
+//     profileAvatar.style.backgroundImage = `url(${result.avatar})`;
 
-//    userId = result._id;
-//    userName.textContent = result.name;
-//    userAbout.textContent = result.about;
-//    profileAvatar.style.backgroundImage = `url(${result.avatar})`;
+    
+// //       Лайк
 
-//    for (let i = 0; i < result.length; i++) {
-//      cardsContainer.append(createCard(result[i]))
-//    }
-
-//       Лайк
-
-//       Карточки?
+// //       Карточки?
 
 // })
 // .catch((err) => {
