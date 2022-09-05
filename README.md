@@ -23,8 +23,8 @@
 ### Доработка проекта будет включать:
 ...
 
-<!-- **Ссылка на сайт**  
-* [Mesto](https://polinashchepochkina.github.io/mesto-project-bootcamp/) -->
+**Ссылка на сайт**  
+* [Mesto](https://polinashchepochkina.github.io/mesto-project-bootcamp/)
 
 **Figma**  
 * [Ссылка на макет в Figma 1](https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=28212%3A155)
