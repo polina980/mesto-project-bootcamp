@@ -8,12 +8,6 @@ export function openPopup(popup) {
   document.addEventListener('keydown', closePopupEsc);
 }
 
-export function closePopupOverlay(event) {
-  if (event.target === event.currentTarget) {
-    closePopup(event.currentTarget);
-  }
-}
-
 export function closePopupEsc(event) {
   if (event.key === 'Escape') {
     const popup = document.querySelector('.popup_opened');

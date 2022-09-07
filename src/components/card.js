@@ -14,7 +14,7 @@ export function createCard(card) {
   cardImage.alt = card.name;
   cardNew.id = card._id;
   cardNew.querySelector('.card__title').textContent = card.name;
-  cardNew.querySelector('.card__like-counter').textContent = card.likes.length;
+  likeCounter.textContent = card.likes.length;
   ////Like////
   cardLikeButton.addEventListener('click', function () {
     if (cardLikeButton.classList.contains('card__like-button_active')) {
@@ -62,7 +62,7 @@ export function deleteCard(event) {
 ////Like////
 function addLike(cardNew, cardLikeButton, likeCounter) {
   return likeCard(cardNew.id)
-    .then(function (card) {
+    .then((card) => {
       cardLikeButton.classList.add('card__like-button_active');
       likeCounter.textContent = card.likes.length;
     })
@@ -71,7 +71,7 @@ function addLike(cardNew, cardLikeButton, likeCounter) {
 
 function deleteLike(cardNew, cardLikeButton, likeCounter) {
   return dislikeCard(cardNew.id)
-    .then(function (card) {
+    .then((card) => {
       cardLikeButton.classList.remove('card__like-button_active');
       likeCounter.textContent = card.likes.length;
     })

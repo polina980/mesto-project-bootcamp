@@ -14,8 +14,7 @@ import { revalidateForm, enableValidation } from './validate.js';
 import { closePopup, openPopup } from './modal.js';
 import {
   getServerUserData, getServerInitialCards,
-  patchUserAvatar, patchUserData, postNewCard,
-  handleError
+  patchUserAvatar, patchUserData, postNewCard, handleError
 } from './api.js';
 import { renderLoading } from './utils.js'
 
@@ -52,42 +51,36 @@ popups.forEach((popup) => {
 
 function submitFormAvatar(event) {
   event.preventDefault();
-  renderLoading(true, popupAvatar);
+  renderLoading(true, event.submitter);
   patchUserAvatar(inputAvatarUrl.value)
     .then((userData) => {
       profileAvatar.style.backgroundImage = `url(${userData.avatar})`;
     })
-    .then(closePopup(popupAvatar))
-    .finally(() => {
-      renderLoading(false, popupAvatar)
-    })
+    .then(() => closePopup(popupAvatar))
+    .finally(() => { renderLoading(false, event.submitter) })
 }
 
 function submitFormEdit(event) {
   event.preventDefault();
-  renderLoading(true, popupEdit)
+  renderLoading(true, event.submitter)
   patchUserData(inputUserName.value, inputUserAbout.value)
     .then((userData) => {
       userName.textContent = userData.name;
       userAbout.textContent = userData.about;
     })
-    .then(closePopup(popupEdit))
-    .finally(() => {
-      renderLoading(false, popupEdit)
-    })
+    .then(() => closePopup(popupEdit))
+    .finally(() => { renderLoading(false, event.submitter) })
 }
 
 function submitFormAdd(event) {
   event.preventDefault();
-  renderLoading(true, popupAdd)
+  renderLoading(true, event.submitter)
   postNewCard(inputPlaceName.value, inputPlaceUrl.value)
     .then((cards) => {
       cardsContainer.prepend(createCard(cards));
     })
-    .then(closePopup(popupAdd))
-    .finally(() => {
-      renderLoading(false, popupAdd)
-    })
+    .then(() => closePopup(popupAdd))
+    .finally(() => { renderLoading(false, event.submitter) })
 }
 
 function openPopupAvatar() {

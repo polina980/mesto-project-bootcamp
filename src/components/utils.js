@@ -1,8 +1,7 @@
-export function renderLoading(loading, popup) {
-  const popupSave = popup.querySelector('.form__submit-button')
+export function renderLoading(loading, button, buttonText = 'Сохранить') {
   if (loading) {
-    popupSave.textContent = 'Сохранение...'
+    button.textContent = 'Сохранение...'
   } else {
-    popupSave.textContent = 'Сохранить'
+    button.textContent = buttonText
   }
 }
