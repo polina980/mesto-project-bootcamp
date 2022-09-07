@@ -1,6 +1,7 @@
-import { handleError, userId, likeCard, dislikeCard, deleteServerCard } from "./api.js";
-import { openPopup } from "./modal.js";
-import { popupImage, popupImg, popupTxt } from "./variables.js";
+import { handleError, likeCard, dislikeCard, deleteServerCard } from "./api.js";
+import { closePopup, openPopup } from './modal.js';
+import { popupDelete, popupImage, popupImg, popupTxt } from './variables.js';
+import { userId, deletedServerCard } from './index.js'
 
 export function createCard(card) {
   const cardTemplate = document.querySelector('#card-template').content;
@@ -8,7 +9,7 @@ export function createCard(card) {
   const cardImage = cardNew.querySelector('.card__image');
   const cardDeleteButton = cardNew.querySelector('.card__delete-button');
   const cardLikeButton = cardNew.querySelector('.card__like-button');
-  const likeCounter = cardNew.querySelector('.card__like-counter')
+  const likeCounter = cardNew.querySelector('.card__like-counter');
   cardImage.src = card.link;
   cardImage.alt = card.name;
   cardNew.id = card._id;
@@ -16,7 +17,11 @@ export function createCard(card) {
   cardNew.querySelector('.card__like-counter').textContent = card.likes.length;
   ////Like////
   cardLikeButton.addEventListener('click', function () {
-    likedCard(cardNew, cardLikeButton, likeCounter)
+    if (cardLikeButton.classList.contains('card__like-button_active')) {
+      deleteLike(cardNew, cardLikeButton, likeCounter)
+    } else {
+      addLike(cardNew, cardLikeButton, likeCounter)
+    }
   })
   for (let i = 0; i < card.likes.length; i++) {
     if (card.likes[i]._id === userId) {
@@ -24,8 +29,9 @@ export function createCard(card) {
     }
   }
   ////Delete////
-  cardDeleteButton.addEventListener('click', function () {
-    deleteCard(cardNew)
+  cardDeleteButton.addEventListener('click', function (event) {
+    deletedServerCard = event.target.closest('.card__item')
+    openPopup(popupDelete);
   })
   if (card.owner._id !== userId) {
     cardDeleteButton.remove()
@@ -39,26 +45,35 @@ export function createCard(card) {
   });
   ////New card////
   return cardNew;
-};
+}
 
 ////Delete////
-export function deleteCard(cardNew) {
-  return deleteServerCard(cardNew.id)
-    .then(() => {
-      cardNew.remove();
+export function deleteCard(event) {
+  event.preventDefault();
+  return deleteServerCard(deletedServerCard.id)
+    .then(function () {
+      deletedServerCard.remove();
+      closePopup(popupDelete);
+      deletedServerCard = null;
     })
     .catch(handleError)
 }
 
 ////Like////
-export function likedCard(cardNew, cardLikeButton, likeCounter) {
-  if (cardLikeButton.classList.contains('card__like-button_active')) {
-    dislikeCard(userId, cardNew.id);
-    cardLikeButton.classList.remove('card__like-button_active');
-    likeCounter.textContent = Number(likeCounter.textContent) - 1;
-  } else {
-    likeCard(userId, cardNew.id);
-    cardLikeButton.classList.add('card__like-button_active');
-    likeCounter.textContent = Number(likeCounter.textContent) + 1;
-  }
+function addLike(cardNew, cardLikeButton, likeCounter) {
+  return likeCard(cardNew.id)
+    .then(function (card) {
+      cardLikeButton.classList.add('card__like-button_active');
+      likeCounter.textContent = card.likes.length;
+    })
+    .catch(handleError)
+}
+
+function deleteLike(cardNew, cardLikeButton, likeCounter) {
+  return dislikeCard(cardNew.id)
+    .then(function (card) {
+      cardLikeButton.classList.remove('card__like-button_active');
+      likeCounter.textContent = card.likes.length;
+    })
+    .catch(handleError)
 }

@@ -1,15 +1,5 @@
-import {
-  profileAvatar, userName, userAbout,
-  cardsContainer, inputAvatarUrl,
-  inputUserName, inputUserAbout,
-  inputPlaceName, inputPlaceUrl, popupAvatar, popupEdit, popupAdd,
-
-} from "./variables.js";
-import { createCard } from "./card.js";
-
-export let userId = '';
-
-const config = {
+///Config///
+export const config = {
   baseUrl: `https://nomoreparties.co/v1/wbc-cohort-1`,
   headers: {
     authorization: '61650a97-0198-4977-9b18-131273aaff2f',
@@ -17,6 +7,7 @@ const config = {
   }
 }
 
+///Функция проверки ответа///
 export function handleResponse(res) {
   if (res.ok) {
     return res.json();
@@ -24,32 +15,17 @@ export function handleResponse(res) {
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
+///Ошибки, которые попадают в .catch///
 export function handleError(err) {
   console.log(err);
-};
-
-function savingPopup(saving, popup) {
-  const popupSave = popup.querySelector('.form__submit-button')
-  if (saving) {
-    popupSave.textContent = 'Сохранение...'
-  } else {
-    popupSave.textContent = 'Сохранить'
-  }
 }
 
-////Загрузка информации о пользователе с сервера////
+//Загрузка информации о пользователе с сервера////
 export function getServerUserData() {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers,
   })
     .then(handleResponse)
-    .then((result) => {
-      userId = result._id;
-      userName.textContent = result.name;
-      userAbout.textContent = result.about;
-      profileAvatar.style.backgroundImage = `url(${result.avatar})`;
-    })
-    .catch(handleError);
 }
 
 ////Загрузка карточек с сервера////
@@ -58,107 +34,61 @@ export function getServerInitialCards() {
     headers: config.headers,
   })
     .then(handleResponse)
-    .then((result) => {
-      for (let i = 0; i < result.length; i++) {
-        cardsContainer.append(createCard(result[i]))
-      }
-      console.log(result)
-    })
-    .catch(handleError);
-}
-
-////Редактирование профиля////
-export function patchUserData() {
-  savingPopup(true, popupEdit)
-  return fetch(`${config.baseUrl}/users/me`, {
-    method: 'PATCH',
-    headers: config.headers,
-    body: JSON.stringify({
-      name: inputUserName.value,
-      about: inputUserAbout.value,
-    })
-  })
-    .then(handleResponse)
-    .then(getServerUserData)
-    .catch(handleError)
-    .finally(function () {
-      savingPopup(false, popupEdit)
-    })
 }
 
 ////Обновление аватара пользователя////
-export function patchUserAvatar() {
-  savingPopup(true, popupAvatar)
+export function patchUserAvatar(avatar) {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
     headers: config.headers,
-    body: JSON.stringify({
-      avatar: inputAvatarUrl.value
-    })
+    body: JSON.stringify({ avatar })
   })
     .then(handleResponse)
-    .then(getServerUserData)
-    .catch(handleError)
-    .finally(function () {
-      savingPopup(false, popupAvatar)
-    })
+}
+
+////Редактирование профиля////
+export function patchUserData(name, about) {
+  return fetch(`${config.baseUrl}/users/me`, {
+    method: 'PATCH',
+    headers: config.headers,
+    body: JSON.stringify({ name, about })
+  })
+    .then(handleResponse)
 }
 
 ////Добавление новой карточки////
-export function postNewCard() {
-  savingPopup(true, popupAdd)
+export function postNewCard(name, link) {
   return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
     headers: config.headers,
-    body: JSON.stringify({
-      name: inputPlaceName.value,
-      link: inputPlaceUrl.value
-    })
+    body: JSON.stringify({ name, link })
   })
     .then(handleResponse)
-    .then((result) => {
-      cardsContainer.prepend(createCard(result));
-    })
-    .catch(handleError)
-    .finally(function () {
-      savingPopup(false, popupAdd)
-    })
 }
 
 ////Удаление только своей карточки////
-export function deleteServerCard(cardId) {
-  return fetch(`${config.baseUrl}/cards/${cardId}`, {
+export function deleteServerCard(id) {
+  return fetch(`${config.baseUrl}/cards/${id}`, {
     method: 'DELETE',
-    headers: config.headers,
-    body: JSON.stringify({
-      id: cardId
-    })
+    headers: config.headers
   })
     .then(handleResponse)
 }
 
 ////Добавление лайка////
-export function likeCard(userId, cardId) {
-  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+export function likeCard(id) {
+  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
     method: 'PUT',
     headers: config.headers,
-    body: JSON.stringify({
-      id: cardId,
-      likes: userId
-    })
   })
     .then(handleResponse)
 }
 
 ////Удаление лайка////
-export function dislikeCard(userId, cardId) {
-  return fetch(`${config.baseUrl}/cards/likes/${cardId}`, {
+export function dislikeCard(id) {
+  return fetch(`${config.baseUrl}/cards/likes/${id}`, {
     method: 'DELETE',
     headers: config.headers,
-    body: JSON.stringify({
-      id: cardId,
-      likes: userId
-    })
   })
     .then(handleResponse)
 }

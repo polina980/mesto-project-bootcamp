@@ -1,26 +1,26 @@
 import '../pages/index.css';
 
 import {
-  popupAvatar, popupEdit, popupAdd, popupImage,
+  popups, popupAvatar, popupEdit, popupAdd,
   profileAvatar, buttonOpenEdit, buttonOpenAdd,
   formAvatar, formEdit, formAdd,
-  inputAvatarUrl,
   userName, userAbout, inputUserName, inputUserAbout,
-  inputPlaceName, inputPlaceUrl,
-  buttonCloseAvatar, buttonCloseAdd, buttonCloseEdit, buttonCloseImage
+  inputAvatarUrl, inputPlaceName, inputPlaceUrl,
+  cardsContainer,
+  formDelete
 } from './variables.js';
-// import { initialCards } from './data.js';
-// import { createCard } from './card.js';
+import { createCard, deleteCard } from './card.js';
 import { revalidateForm, enableValidation } from './validate.js';
-import {
-  closePopup, openPopup,
-  closePopupOverlay
-} from './modal.js';
+import { closePopup, openPopup } from './modal.js';
 import {
   getServerUserData, getServerInitialCards,
-  patchUserData, patchUserAvatar, postNewCard,
-  userId
+  patchUserAvatar, patchUserData, postNewCard,
+  handleError
 } from './api.js';
+import { renderLoading } from './utils.js'
+
+export let userId;
+export let deletedServerCard = null;
 
 const mestoSelectors = {
   formSelector: '.form',
@@ -29,98 +29,99 @@ const mestoSelectors = {
   inactiveButtonClass: 'form__submit-button_inactive',
   inputErrorClass: 'form__input_type-error',
   errorClass: 'form__input-error_active',
-};
+}
 
 profileAvatar.addEventListener('click', openPopupAvatar);
 buttonOpenEdit.addEventListener('click', openPopupEdit);
 buttonOpenAdd.addEventListener('click', openPopupAdd);
-//buttonOpenDelete.addEventListener('click', openPopupDelete);
 formAvatar.addEventListener('submit', submitFormAvatar);
 formEdit.addEventListener('submit', submitFormEdit);
 formAdd.addEventListener('submit', submitFormAdd);
-//formDelete.addEventListener('submit', submitFormDelete);
-popupAvatar.addEventListener('click', closePopupOverlay);
-popupEdit.addEventListener('click', closePopupOverlay);
-popupAdd.addEventListener('click', closePopupOverlay);
-popupImage.addEventListener('click', closePopupOverlay);
+formDelete.addEventListener('submit', deleteCard);
 
-buttonCloseAvatar.addEventListener('click', function () {
-  closePopup(popupAvatar);
-});
-buttonCloseEdit.addEventListener('click', function () {
-  closePopup(popupEdit);
-});
-buttonCloseAdd.addEventListener('click', function () {
-  closePopup(popupAdd);
-});
-buttonCloseImage.addEventListener('click', function () {
-  closePopup(popupImage);
-});
-// buttonCloseDelete.addEventListener('click', function () {
-//   closePopup(popupDelete);
-// });
+popups.forEach((popup) => {
+  popup.addEventListener('mousedown', (event) => {
+    if (event.target.classList.contains('popup_opened')) {
+      closePopup(popup)
+    }
+    if (event.target.classList.contains('popup__close-button')) {
+      closePopup(popup)
+    }
+  })
+})
 
 function submitFormAvatar(event) {
   event.preventDefault();
-  patchUserAvatar();
-  closePopup(popupAvatar);
-};
+  renderLoading(true, popupAvatar);
+  patchUserAvatar(inputAvatarUrl.value)
+    .then((userData) => {
+      profileAvatar.style.backgroundImage = `url(${userData.avatar})`;
+    })
+    .then(closePopup(popupAvatar))
+    .finally(() => {
+      renderLoading(false, popupAvatar)
+    })
+}
 
 function submitFormEdit(event) {
   event.preventDefault();
-  patchUserData();
-  closePopup(popupEdit);
-};
+  renderLoading(true, popupEdit)
+  patchUserData(inputUserName.value, inputUserAbout.value)
+    .then((userData) => {
+      userName.textContent = userData.name;
+      userAbout.textContent = userData.about;
+    })
+    .then(closePopup(popupEdit))
+    .finally(() => {
+      renderLoading(false, popupEdit)
+    })
+}
 
 function submitFormAdd(event) {
   event.preventDefault();
-  postNewCard();
-  closePopup(popupAdd);
-};
+  renderLoading(true, popupAdd)
+  postNewCard(inputPlaceName.value, inputPlaceUrl.value)
+    .then((cards) => {
+      cardsContainer.prepend(createCard(cards));
+    })
+    .then(closePopup(popupAdd))
+    .finally(() => {
+      renderLoading(false, popupAdd)
+    })
+}
 
-function openPopupAvatar(event) {
-  event.preventDefault();
-  inputAvatarUrl.value = '';
+function openPopupAvatar() {
+  formAvatar.reset();
   revalidateForm(formAvatar, mestoSelectors);
   openPopup(popupAvatar);
-};
+}
 
 function openPopupEdit() {
   inputUserName.value = userName.textContent;
   inputUserAbout.value = userAbout.textContent;
   revalidateForm(formEdit, mestoSelectors);
   openPopup(popupEdit);
-};
+}
 
 function openPopupAdd() {
-  inputPlaceName.value = '';
-  inputPlaceUrl.value = '';
+  formAdd.reset();
   revalidateForm(formAdd, mestoSelectors);
   openPopup(popupAdd);
-};
+}
 
 enableValidation(mestoSelectors);
 
+Promise.all([getServerUserData(), getServerInitialCards()])
+  .then(function ([userData, cards]) {
+    userId = userData._id;
+    userName.textContent = userData.name;
+    userAbout.textContent = userData.about;
+    profileAvatar.style.backgroundImage = `url(${userData.avatar})`;
+    console.log(userData)
 
-getServerUserData();
-getServerInitialCards();
-
-/////////////API///////////// аааааааааааааа :(
-// export let userId;
-
-// Promise.all([getServerUserData(), getServerInitialCards()])
-//   .then((result) => {
-//     userId = result._id;
-//     userName.textContent = result.name;
-//     userAbout.textContent = result.about;
-//     profileAvatar.style.backgroundImage = `url(${result.avatar})`;
-
-    
-// //       Лайк
-
-// //       Карточки?
-
-// })
-// .catch((err) => {
-//   console.log(err);
-// })
+    for (let i = 0; i < cards.length; i++) {
+      cardsContainer.append(createCard(cards[i]))
+    }
+    console.log(cards)
+  })
+  .catch(handleError)

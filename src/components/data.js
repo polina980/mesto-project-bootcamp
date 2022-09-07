@@ -23,4 +23,4 @@ export const initialCards = [
     name: 'Нижний Новгород',
     link: 'https://images.unsplash.com/photo-1636622406136-fe729cbc0f8e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=685&q=80'
   }
-];
+]
