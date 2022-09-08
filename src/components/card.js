@@ -1,7 +1,9 @@
 import { handleError, likeCard, dislikeCard, deleteServerCard } from "./api.js";
 import { closePopup, openPopup } from './modal.js';
 import { popupDelete, popupImage, popupImg, popupTxt } from './variables.js';
-import { userId, deletedServerCard } from './index.js'
+import { userId } from './index.js'
+
+export let deletedServerCard = null;
 
 export function createCard(card) {
   const cardTemplate = document.querySelector('#card-template').content;

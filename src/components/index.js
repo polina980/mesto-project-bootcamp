@@ -19,7 +19,6 @@ import {
 import { renderLoading } from './utils.js'
 
 export let userId;
-export let deletedServerCard = null;
 
 const mestoSelectors = {
   formSelector: '.form',
