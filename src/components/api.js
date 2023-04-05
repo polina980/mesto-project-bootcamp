@@ -1,4 +1,4 @@
-///Config///
+// Config
 export const config = {
   baseUrl: `https://nomoreparties.co/v1/wbc-cohort-1`,
   headers: {
@@ -7,7 +7,7 @@ export const config = {
   }
 }
 
-///Функция проверки ответа///
+// Функция проверки ответа
 export function handleResponse(res) {
   if (res.ok) {
     return res.json();
@@ -15,12 +15,12 @@ export function handleResponse(res) {
   return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-///Ошибки, которые попадают в .catch///
+// Ошибки, которые попадают в .catch
 export function handleError(err) {
   console.log(err);
 }
 
-//Загрузка информации о пользователе с сервера////
+// Загрузка информации о пользователе с сервера
 export function getServerUserData() {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers,
@@ -28,7 +28,7 @@ export function getServerUserData() {
     .then(handleResponse)
 }
 
-////Загрузка карточек с сервера////
+// Загрузка карточек с сервера
 export function getServerInitialCards() {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers,
@@ -36,7 +36,7 @@ export function getServerInitialCards() {
     .then(handleResponse)
 }
 
-////Обновление аватара пользователя////
+// Обновление аватара пользователя
 export function patchUserAvatar(avatar) {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method: 'PATCH',
@@ -46,7 +46,7 @@ export function patchUserAvatar(avatar) {
     .then(handleResponse)
 }
 
-////Редактирование профиля////
+// Редактирование профиля
 export function patchUserData(name, about) {
   return fetch(`${config.baseUrl}/users/me`, {
     method: 'PATCH',
@@ -56,7 +56,7 @@ export function patchUserData(name, about) {
     .then(handleResponse)
 }
 
-////Добавление новой карточки////
+// Добавление новой карточки
 export function postNewCard(name, link) {
   return fetch(`${config.baseUrl}/cards`, {
     method: 'POST',
@@ -66,7 +66,7 @@ export function postNewCard(name, link) {
     .then(handleResponse)
 }
 
-////Удаление только своей карточки////
+// Удаление только своей карточки
 export function deleteServerCard(id) {
   return fetch(`${config.baseUrl}/cards/${id}`, {
     method: 'DELETE',
@@ -75,7 +75,7 @@ export function deleteServerCard(id) {
     .then(handleResponse)
 }
 
-////Добавление лайка////
+// Добавление лайка
 export function likeCard(id) {
   return fetch(`${config.baseUrl}/cards/likes/${id}`, {
     method: 'PUT',
@@ -84,7 +84,7 @@ export function likeCard(id) {
     .then(handleResponse)
 }
 
-////Удаление лайка////
+// Удаление лайка
 export function dislikeCard(id) {
   return fetch(`${config.baseUrl}/cards/likes/${id}`, {
     method: 'DELETE',

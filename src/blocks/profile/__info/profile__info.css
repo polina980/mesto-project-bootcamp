@@ -5,9 +5,9 @@
   margin: 0 auto;
   padding: 26px 38px 33px 65px;
   grid-area: info;
-  grid-template-areas: 
-  "title edit-button"
-  "text text";
+  grid-template-areas:
+    "title edit-button"
+    "text text";
   gap: 8px 10px;
   align-items: baseline;
 }

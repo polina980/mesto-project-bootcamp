@@ -17,7 +17,7 @@ export function createCard(card) {
   cardNew.id = card._id;
   cardNew.querySelector('.card__title').textContent = card.name;
   likeCounter.textContent = card.likes.length;
-  ////Like////
+
   cardLikeButton.addEventListener('click', function () {
     if (cardLikeButton.classList.contains('card__like-button_active')) {
       deleteLike(cardNew, cardLikeButton, likeCounter)
@@ -30,7 +30,7 @@ export function createCard(card) {
       cardLikeButton.classList.add('card__like-button_active');
     }
   }
-  ////Delete////
+
   cardDeleteButton.addEventListener('click', function (event) {
     deletedServerCard = event.target.closest('.card__item')
     openPopup(popupDelete);
@@ -38,18 +38,17 @@ export function createCard(card) {
   if (card.owner._id !== userId) {
     cardDeleteButton.remove()
   }
-  ////Full Image////
+
   cardImage.addEventListener('click', function () {
     popupImg.src = card.link;
     popupImg.alt = card.name;
     popupTxt.textContent = card.name;
     openPopup(popupImage);
   });
-  ////New card////
+
   return cardNew;
 }
 
-////Delete////
 export function deleteCard(event) {
   event.preventDefault();
   return deleteServerCard(deletedServerCard.id)
@@ -61,7 +60,6 @@ export function deleteCard(event) {
     .catch(handleError)
 }
 
-////Like////
 function addLike(cardNew, cardLikeButton, likeCounter) {
   return likeCard(cardNew.id)
     .then((card) => {
